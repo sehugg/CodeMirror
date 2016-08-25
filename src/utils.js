@@ -1,5 +1,3 @@
-import { ie, ios } from "./sniffs";
-
 export function bind(f) {
   var args = Array.prototype.slice.call(arguments, 1);
   return function(){return f.apply(null, args);};
@@ -87,12 +85,6 @@ export function spaceStr(n) {
 }
 
 export function lst(arr) { return arr[arr.length-1]; }
-
-export var selectInput = function(node) { node.select(); };
-if (ios) // Mobile Safari apparently has a bug where select() is broken.
-  selectInput = function(node) { node.selectionStart = 0; node.selectionEnd = node.value.length; };
-else if (ie) // Suppress mysterious IE10 errors
-  selectInput = function(node) { try { node.select(); } catch(_e) {} };
 
 export function map(array, f) {
   var out = [];

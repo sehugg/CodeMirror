@@ -1,5 +1,5 @@
 import { selectAll } from "./cm_utils";
-import { activeElt, removeChildrenAndAdd } from "./dom_utils";
+import { activeElt, removeChildrenAndAdd, selectInput } from "./dom_utils";
 import { off, on, signalDOMEvent } from "./events";
 import { hasCopyEvent, hasSelection } from "./feature_detection";
 import { applyTextInput, copyableRanges, handlePaste, hiddenTextarea, lastCopied, setLastCopied } from "./input";
@@ -9,7 +9,7 @@ import { simpleSelection } from "./selection";
 import { prepareSelection } from "./selection_draw";
 import { setSelection } from "./selection_updates";
 import { captureRightClick, ie, ie_version, ios, mac, mobile, presto, webkit } from "./sniffs";
-import { copyObj, Delayed, nothing, sel_dontScroll, selectInput } from "./utils";
+import { copyObj, Delayed, nothing, sel_dontScroll } from "./utils";
 import { e_preventDefault, e_stop, eventInWidget, posFromMouse } from "./utils_events";
 
 // TEXTAREA INPUT STYLE
