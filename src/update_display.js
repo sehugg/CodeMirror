@@ -7,10 +7,10 @@ import { sawCollapsedSpans } from "./saw_special_spans";
 import { measureForScrollbars, updateScrollbars, visibleLines } from "./scrollbars";
 import { updateSelection } from "./selection_draw";
 import { ie, ie_version, mac, webkit } from "./sniffs";
-import { visualLineEndNo, visualLineNo } from "./spans";
+import { heightAtLine, visualLineEndNo, visualLineNo } from "./spans";
 import { buildLineElement, updateLineForChanges } from "./update_line";
 import { indexOf } from "./utils";
-import { getLine, heightAtLine, lineNumberFor, updateLineHeight } from "./utils_line";
+import { getLine, lineNumberFor, updateLineHeight } from "./utils_line";
 import { adjustView, countDirtyView, resetView } from "./view_tracking";
 
 // DISPLAY DRAWING

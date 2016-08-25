@@ -14,10 +14,11 @@ import { charCoords, charWidth, clearCaches, clearLineMeasurementCache, coordsCh
 import { Range } from "./selection";
 import { replaceOneSelection, skipAtomic } from "./selection_updates";
 import { addToScrollPos, calculateScrollPos, ensureCursorVisible, resolveScrollToPos, scrollIntoView } from "./scrolling";
+import { heightAtLine } from "./spans";
 import { updateGutterSpace } from "./update_display";
 import { indexOf, insertSorted, isEmpty, isWordChar, sel_dontScroll, sel_move } from "./utils";
 import { lineLeft, lineRight, moveLogically, moveVisually } from "./utils_bidi";
-import { changeLine, getLine, heightAtLine, isLine, lineAtHeight, lineNo } from "./utils_line";
+import { changeLine, getLine, isLine, lineAtHeight, lineNo } from "./utils_line";
 import { clipLine, clipPos } from "./utils_pos";
 import { regChange, regLineChange } from "./view_tracking";
 

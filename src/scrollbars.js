@@ -2,9 +2,10 @@ import { elt } from "./dom_utils";
 import { on } from "./events";
 import { scrollGap, paddingTop, paddingVert } from "./position_measurement";
 import { ie, ie_version, mac, mac_geMountainLion } from "./sniffs";
+import { heightAtLine } from "./spans";
 import { updateHeightsInViewport } from "./update_display";
 import { copyObj, Delayed } from "./utils";
-import { getLine, heightAtLine, lineAtHeight } from "./utils_line";
+import { getLine, lineAtHeight } from "./utils_line";
 
 // SCROLLBARS
 

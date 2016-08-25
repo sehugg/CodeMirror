@@ -11,9 +11,9 @@ import { clearCaches, compensateForHScroll, estimateLineHeights } from "./positi
 import { updateScrollbars } from "./scrollbars";
 import { updateSelection } from "./selection_draw";
 import { mobile, windows } from "./sniffs";
+import { findMaxLine } from "./spans";
 import { loadMode, resetModeState } from "./state";
 import { setGuttersForLineNumbers } from "./utils";
-import { findMaxLine } from "./utils_line";
 import { regChange } from "./view_tracking";
 
 export var Init = {toString: function(){return "CodeMirror.Init";}};

@@ -1,4 +1,3 @@
-import { collapsedSpanAtEnd, collapsedSpanAtStart, visualLine } from "./spans";
 import { indexOf } from "./utils"
 import { bidiOrdering } from "./utils_bidi";
 import { clipLine } from "./utils_pos";
@@ -82,26 +81,6 @@ export function lineAtHeight(chunk, h) {
   return n + i;
 }
 
-// Find the height above the given line.
-export function heightAtLine(lineObj) {
-  lineObj = visualLine(lineObj);
-
-  var h = 0, chunk = lineObj.parent;
-  for (var i = 0; i < chunk.lines.length; ++i) {
-    var line = chunk.lines[i];
-    if (line == lineObj) break;
-    else h += line.height;
-  }
-  for (var p = chunk.parent; p; chunk = p, p = chunk.parent) {
-    for (var i = 0; i < p.children.length; ++i) {
-      var cur = p.children[i];
-      if (cur == chunk) break;
-      else h += cur.height;
-    }
-  }
-  return h;
-}
-
 // Get the bidi ordering for the given line (and cache it). Returns
 // false for lines that are fully left-to-right, and an array of
 // BidiSpan objects otherwise.
@@ -109,27 +88,6 @@ export function getOrder(line) {
   var order = line.order;
   if (order == null) order = line.order = bidiOrdering(line.text);
   return order;
-}
-
-// Compute the character length of a line, taking into account
-// collapsed ranges (see markText) that might hide parts, and join
-// other lines onto it.
-export function lineLength(line) {
-  if (line.height == 0) return 0;
-  var len = line.text.length, merged, cur = line;
-  while (merged = collapsedSpanAtStart(cur)) {
-    var found = merged.find(0, true);
-    cur = found.from.line;
-    len += found.from.ch - found.to.ch;
-  }
-  cur = line;
-  while (merged = collapsedSpanAtEnd(cur)) {
-    var found = merged.find(0, true);
-    len -= cur.text.length - found.from.ch;
-    cur = found.to.line;
-    len += cur.text.length - found.to.ch;
-  }
-  return len;
 }
 
 // Utility for applying a change to a line by handle or number,
@@ -145,21 +103,6 @@ export function changeLine(doc, handle, changeType, op) {
 }
 
 export function isLine(doc, l) {return l >= doc.first && l < doc.first + doc.size;}
-
-// Find the longest line in the document.
-export function findMaxLine(cm) {
-  var d = cm.display, doc = cm.doc;
-  d.maxLine = getLine(doc, doc.first);
-  d.maxLineLength = lineLength(d.maxLine);
-  d.maxLineChanged = true;
-  doc.iter(function(line) {
-    var len = lineLength(line);
-    if (len > d.maxLineLength) {
-      d.maxLineLength = len;
-      d.maxLine = line;
-    }
-  });
-}
 
 export function lineNumberFor(options, i) {
   return String(options.lineNumberFormatter(i + options.firstLineNumber));

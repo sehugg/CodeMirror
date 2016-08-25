@@ -1,8 +1,8 @@
 import { eventMixin } from "./events";
 import { runInOp } from "./operations";
 import { addToScrollPos } from "./scrolling";
-import { lineIsHidden } from "./spans";
-import { changeLine, heightAtLine, lineNo, updateLineHeight } from "./utils_line";
+import { heightAtLine, lineIsHidden } from "./spans";
+import { changeLine, lineNo, updateLineHeight } from "./utils_line";
 import { regLineChange } from "./view_tracking";
 import { widgetHeight } from "./utils_widgets";
 
