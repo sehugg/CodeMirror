@@ -8,7 +8,8 @@ import { setScrollLeft } from "./scroll_events";
 import { restartBlink } from "./selection_draw";
 import { maybeScrollWindow, scrollPosIntoView } from "./scrolling";
 import { findMaxLine } from "./spans";
-import { DisplayUpdate, maybeClipScrollbars, postUpdateDisplay, setDocumentHeight, updateDisplayIfNeeded, updateHeightsInViewport } from "./update_display";
+import { DisplayUpdate, maybeClipScrollbars, postUpdateDisplay, setDocumentHeight, updateDisplayIfNeeded } from "./update_display";
+import { updateHeightsInViewport } from "./update_lines";
 import { clipPos } from "./utils_pos";
 
 // OPERATIONS

@@ -2,15 +2,16 @@ import { activeElt, removeChildren } from "./dom_utils";
 import { hasHandler, signal } from "./events";
 import { startWorker } from "./highlight";
 import { maybeUpdateLineNumberWidth } from "./line_numbers";
-import { displayHeight, displayWidth, getDimensions, paddingVert, scrollGap, textHeight } from "./position_measurement";
+import { displayHeight, displayWidth, getDimensions, paddingVert, scrollGap } from "./position_measurement";
 import { sawCollapsedSpans } from "./saw_special_spans";
-import { measureForScrollbars, updateScrollbars, visibleLines } from "./scrollbars";
+import { measureForScrollbars, updateScrollbars } from "./scrollbars";
 import { updateSelection } from "./selection_draw";
-import { ie, ie_version, mac, webkit } from "./sniffs";
+import { mac, webkit } from "./sniffs";
 import { heightAtLine, visualLineEndNo, visualLineNo } from "./spans";
 import { buildLineElement, updateLineForChanges } from "./update_line";
+import { updateHeightsInViewport, visibleLines } from "./update_lines";
 import { indexOf } from "./utils";
-import { getLine, lineNumberFor, updateLineHeight } from "./utils_line";
+import { getLine, lineNumberFor } from "./utils_line";
 import { adjustView, countDirtyView, resetView } from "./view_tracking";
 
 // DISPLAY DRAWING
@@ -211,40 +212,6 @@ function patchDisplay(cm, updateNumbersFrom, dims) {
     lineN += lineView.size;
   }
   while (cur) cur = rm(cur);
-}
-
-// Read the actual heights of the rendered lines, and update their
-// stored heights to match.
-export function updateHeightsInViewport(cm) {
-  var display = cm.display;
-  var prevBottom = display.lineDiv.offsetTop;
-  for (var i = 0; i < display.view.length; i++) {
-    var cur = display.view[i], height;
-    if (cur.hidden) continue;
-    if (ie && ie_version < 8) {
-      var bot = cur.node.offsetTop + cur.node.offsetHeight;
-      height = bot - prevBottom;
-      prevBottom = bot;
-    } else {
-      var box = cur.node.getBoundingClientRect();
-      height = box.bottom - box.top;
-    }
-    var diff = cur.line.height - height;
-    if (height < 2) height = textHeight(display);
-    if (diff > .001 || diff < -.001) {
-      updateLineHeight(cur.line, height);
-      updateWidgetHeight(cur.line);
-      if (cur.rest) for (var j = 0; j < cur.rest.length; j++)
-        updateWidgetHeight(cur.rest[j]);
-    }
-  }
-}
-
-// Read and store the height of line widgets associated with the
-// given line.
-function updateWidgetHeight(line) {
-  if (line.widgets) for (var i = 0; i < line.widgets.length; ++i)
-    line.widgets[i].height = line.widgets[i].node.parentNode.offsetHeight;
 }
 
 export function updateGutterSpace(cm) {
