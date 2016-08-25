@@ -2,6 +2,7 @@ import { changeEnd } from "./changes";
 import { linkedDocs } from "./document_data";
 import { signal } from "./events";
 import { cmp, copyPos } from "./Pos";
+import { stretchSpansOverChange } from "./spans";
 import { lst } from "./utils";
 import { getBetween } from "./utils_line";
 
@@ -163,10 +164,36 @@ function removeClearedSpans(spans) {
 }
 
 // Retrieve and filter the old marked spans stored in a change event.
-export function getOldSpans(doc, change) {
+function getOldSpans(doc, change) {
   var found = change["spans_" + doc.id];
   if (!found) return null;
   for (var i = 0, nw = []; i < change.text.length; ++i)
     nw.push(removeClearedSpans(found[i]));
   return nw;
+}
+
+// Used for un/re-doing changes from the history. Combines the
+// result of computing the existing spans with the set of spans that
+// existed in the history (so that deleting around a span and then
+// undoing brings back the span).
+export function mergeOldSpans(doc, change) {
+  var old = getOldSpans(doc, change);
+  var stretched = stretchSpansOverChange(doc, change);
+  if (!old) return stretched;
+  if (!stretched) return old;
+
+  for (var i = 0; i < old.length; ++i) {
+    var oldCur = old[i], stretchCur = stretched[i];
+    if (oldCur && stretchCur) {
+      spans: for (var j = 0; j < stretchCur.length; ++j) {
+        var span = stretchCur[j];
+        for (var k = 0; k < oldCur.length; ++k)
+          if (oldCur[k].marker == span.marker) continue spans;
+        oldCur.push(span);
+      }
+    } else if (stretchCur) {
+      old[i] = stretchCur;
+    }
+  }
+  return old;
 }
