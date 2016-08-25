@@ -1,11 +1,9 @@
 import { addClass, elt, removeChildren, rmClass } from "./dom_utils";
 import { on } from "./events";
-import Pos from "./Pos";
-import { clearCaches, scrollGap } from "./position_measurement";
+import { clearCaches } from "./position_measurement";
 import { setScrollLeft, setScrollTop } from "./scroll_events";
 import { scrollbarModel } from "./scrollbar_model";
 import { updateGutterSpace } from "./update_display";
-import { sel_dontScroll } from "./utils";
 
 export function initScrollbars(cm) {
   if (cm.display.scrollbars) {
@@ -50,14 +48,4 @@ export function updateGutters(cm) {
   }
   gutters.style.display = i ? "" : "none";
   updateGutterSpace(cm);
-}
-
-export function setDocumentHeight(cm, measure) {
-  cm.display.sizer.style.minHeight = measure.docHeight + "px";
-  cm.display.heightForcer.style.top = measure.docHeight + "px";
-  cm.display.gutters.style.height = (measure.docHeight + cm.display.barHeight + scrollGap(cm)) + "px";
-}
-
-export function selectAll(cm) {
-  cm.setSelection(Pos(cm.firstLine(), 0), Pos(cm.lastLine()), sel_dontScroll);
 }

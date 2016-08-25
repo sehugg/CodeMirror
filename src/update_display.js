@@ -1,4 +1,3 @@
-import { setDocumentHeight } from "./cm_utils";
 import { activeElt, removeChildren } from "./dom_utils";
 import { hasHandler, signal } from "./events";
 import { startWorker } from "./highlight";
@@ -251,4 +250,10 @@ function updateWidgetHeight(line) {
 export function updateGutterSpace(cm) {
   var width = cm.display.gutters.offsetWidth;
   cm.display.sizer.style.marginLeft = width + "px";
+}
+
+export function setDocumentHeight(cm, measure) {
+  cm.display.sizer.style.minHeight = measure.docHeight + "px";
+  cm.display.heightForcer.style.top = measure.docHeight + "px";
+  cm.display.gutters.style.height = (measure.docHeight + cm.display.barHeight + scrollGap(cm)) + "px";
 }

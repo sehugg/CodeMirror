@@ -1,9 +1,9 @@
 import { deleteNearSelection } from "./api_utilities";
-import { selectAll } from "./cm_utils";
 import { runInOp } from "./operations";
 import Pos from "./Pos";
 import { ensureCursorVisible } from "./scrolling";
 import { Range } from "./selection";
+import { selectAll } from "./selection_updates";
 import { countColumn, sel_dontScroll, sel_move, spaceStr } from "./utils";
 import { lineEnd, lineStart, lineStartSmart } from "./utils_bidi";
 import { getLine } from "./utils_line";

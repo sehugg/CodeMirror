@@ -201,3 +201,7 @@ function movePos(doc, pos, dir, line) {
     return new Pos(pos.line, pos.ch + dir);
   }
 }
+
+export function selectAll(cm) {
+  cm.setSelection(Pos(cm.firstLine(), 0), Pos(cm.lastLine()), sel_dontScroll);
+}

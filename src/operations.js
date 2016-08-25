@@ -1,5 +1,4 @@
 import { signal } from "./events";
-import { setDocumentHeight } from "./cm_utils";
 import { activeElt } from "./dom_utils";
 import { ensureFocus } from "./focus";
 import { alignHorizontally } from "./line_numbers";
@@ -8,7 +7,7 @@ import { measureForScrollbars, updateScrollbars } from "./scrollbars";
 import { setScrollLeft } from "./scroll_events";
 import { restartBlink } from "./selection_draw";
 import { maybeScrollWindow, scrollPosIntoView } from "./scrolling";
-import { DisplayUpdate, maybeClipScrollbars, postUpdateDisplay, updateDisplayIfNeeded, updateHeightsInViewport } from "./update_display";
+import { DisplayUpdate, maybeClipScrollbars, postUpdateDisplay, setDocumentHeight, updateDisplayIfNeeded, updateHeightsInViewport } from "./update_display";
 import { findMaxLine } from "./utils_line";
 import { clipPos } from "./utils_pos";
 
