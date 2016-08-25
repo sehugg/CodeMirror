@@ -58,9 +58,9 @@ CodeMirror.changeEnd = changeEnd;
 
 // SCROLLBARS
 
-import { NativeScrollbars, NullScrollbars } from "./scrollbars";
+import { scrollbarModel } from "./scrollbar_model";
 
-CodeMirror.scrollbarModel = {"native": NativeScrollbars, "null": NullScrollbars};
+CodeMirror.scrollbarModel = scrollbarModel;
 
 // POSITION OBJECT
 

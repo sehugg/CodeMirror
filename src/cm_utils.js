@@ -1,9 +1,9 @@
-import CodeMirror from "./CodeMirror";
 import { addClass, elt, removeChildren, rmClass } from "./dom_utils";
 import { on } from "./events";
 import Pos from "./Pos";
 import { clearCaches, scrollGap } from "./position_measurement";
 import { setScrollLeft, setScrollTop } from "./scroll_events";
+import { scrollbarModel } from "./scrollbar_model";
 import { updateGutterSpace } from "./update_display";
 import { sel_dontScroll } from "./utils";
 
@@ -14,7 +14,7 @@ export function initScrollbars(cm) {
       rmClass(cm.display.wrapper, cm.display.scrollbars.addClass);
   }
 
-  cm.display.scrollbars = new CodeMirror.scrollbarModel[cm.options.scrollbarStyle](function(node) {
+  cm.display.scrollbars = new scrollbarModel[cm.options.scrollbarStyle](function(node) {
     cm.display.wrapper.insertBefore(node, cm.display.scrollbarFiller);
     // Prevent clicks in the scrollbars from killing focus
     on(node, "mousedown", function() {
