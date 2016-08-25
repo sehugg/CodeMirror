@@ -2,7 +2,7 @@ import { addClass, elt, removeChildren, rmClass } from "./dom_utils";
 import { on } from "./events";
 import { clearCaches } from "./position_measurement";
 import { setScrollLeft, setScrollTop } from "./scroll_events";
-import { scrollbarModel } from "./scrollbar_model";
+import { scrollbarModel } from "./scrollbars";
 import { updateGutterSpace } from "./update_display";
 
 export function initScrollbars(cm) {

@@ -58,7 +58,7 @@ CodeMirror.changeEnd = changeEnd;
 
 // SCROLLBARS
 
-import { scrollbarModel } from "./scrollbar_model";
+import { scrollbarModel } from "./scrollbars";
 
 CodeMirror.scrollbarModel = scrollbarModel;
 

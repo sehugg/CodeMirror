@@ -27,7 +27,7 @@ export function measureForScrollbars(cm) {
   };
 }
 
-export function NativeScrollbars(place, scroll, cm) {
+function NativeScrollbars(place, scroll, cm) {
   this.cm = cm;
   var vert = this.vert = elt("div", [elt("div", null, null, "min-width: 1px")], "CodeMirror-vscrollbar");
   var horiz = this.horiz = elt("div", [elt("div", null, null, "height: 100%; min-height: 1px")], "CodeMirror-hscrollbar");
@@ -120,7 +120,7 @@ NativeScrollbars.prototype = copyObj({
   }
 }, NativeScrollbars.prototype);
 
-export function NullScrollbars() {}
+function NullScrollbars() {}
 
 NullScrollbars.prototype = copyObj({
   update: function() { return {bottom: 0, right: 0}; },
@@ -186,3 +186,5 @@ export function visibleLines(display, doc, viewport) {
   }
   return {from: from, to: Math.max(to, from + 1)};
 }
+
+export var scrollbarModel = {"native": NativeScrollbars, "null": NullScrollbars};
