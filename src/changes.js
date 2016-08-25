@@ -1,6 +1,6 @@
 import { isWholeLineUpdate, linkedDocs, updateDoc } from "./document_data";
 import { hasHandler, signal, signalCursorActivity } from "./events";
-import { startWorker } from "./highlight";
+import { startWorker } from "./highlight_worker";
 import { addChangeToHistory, historyChangeFromChange, mergeOldSpans, pushSelectionToHistory } from "./history";
 import { operation, signalLater } from "./operations";
 import Pos from "./Pos";

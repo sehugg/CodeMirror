@@ -1,6 +1,6 @@
 import { activeElt, removeChildren } from "./dom_utils";
 import { hasHandler, signal } from "./events";
-import { startWorker } from "./highlight";
+import { startWorker } from "./highlight_worker";
 import { maybeUpdateLineNumberWidth } from "./line_numbers";
 import { displayHeight, displayWidth, getDimensions, paddingVert, scrollGap } from "./position_measurement";
 import { sawCollapsedSpans } from "./saw_special_spans";

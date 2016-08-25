@@ -1,4 +1,4 @@
-import { startWorker } from "./highlight";
+import { startWorker } from "./highlight_worker";
 import { getMode } from "./modes";
 import { regChange } from "./view_tracking";
 

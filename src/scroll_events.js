@@ -1,4 +1,4 @@
-import { startWorker } from "./highlight";
+import { startWorker } from "./highlight_worker";
 import { alignHorizontally } from "./line_numbers";
 import { chrome, gecko, ie, mac, presto, safari, webkit } from "./sniffs";
 import { updateDisplaySimple} from "./update_display";
