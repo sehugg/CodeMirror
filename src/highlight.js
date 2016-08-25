@@ -1,6 +1,6 @@
 import { runInOp } from "./operations";
 import { findStartLine } from "./selection_draw";
-import { copyState, innerMode, startState } from "./state";
+import { copyState, innerMode, startState } from "./modes";
 import StringStream from "./StringStream";
 import { bind } from "./utils";
 import { getLine, lineNo } from "./utils_line";

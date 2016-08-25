@@ -116,7 +116,7 @@ CodeMirror.defineDocExtension = function(name, func) {
 
 // MODE STATE HANDLING
 
-import { copyState, innerMode, startState } from "./state";
+import { copyState, innerMode, startState } from "./modes";
 
 // Utility functions for working with state. Exported because nested
 // modes need to do this for their inner modes.

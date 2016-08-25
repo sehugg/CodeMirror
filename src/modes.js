@@ -65,3 +65,31 @@ export function extendMode(mode, properties) {
   var exts = modeExtensions.hasOwnProperty(mode) ? modeExtensions[mode] : (modeExtensions[mode] = {});
   copyObj(properties, exts);
 }
+
+export function copyState(mode, state) {
+  if (state === true) return state;
+  if (mode.copyState) return mode.copyState(state);
+  var nstate = {};
+  for (var n in state) {
+    var val = state[n];
+    if (val instanceof Array) val = val.concat([]);
+    nstate[n] = val;
+  }
+  return nstate;
+}
+
+// Given a mode and a state (for that mode), find the inner mode and
+// state at the position that the state refers to.
+export function innerMode(mode, state) {
+  while (mode.innerMode) {
+    var info = mode.innerMode(state);
+    if (!info || info.mode == mode) break;
+    state = info.state;
+    mode = info.mode;
+  }
+  return info || {mode: mode, state: state};
+}
+
+export function startState(mode, a1, a2) {
+  return mode.startState ? mode.startState(a1, a2) : true;
+}
