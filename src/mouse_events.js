@@ -5,12 +5,13 @@ import { delayBlurEvent, ensureFocus } from "./focus";
 import { operation } from "./operations";
 import Pos from "./Pos";
 import { cmp, maxPos, minPos } from "./Pos";
+import { posFromMouse } from "./position_measurement";
 import { visibleLines } from "./scrollbars";
 import { normalizeSelection, Range } from "./selection";
 import { extendRange, extendSelection, replaceOneSelection, setSelection } from "./selection_updates";
 import { captureRightClick, chromeOS, ie, ie_version, mac, webkit } from "./sniffs";
 import { bind, countColumn, findColumn, sel_mouse } from "./utils";
-import { e_button, e_defaultPrevented, e_preventDefault, e_target, eventInWidget, posFromMouse } from "./utils_events";
+import { e_button, e_defaultPrevented, e_preventDefault, e_target, eventInWidget } from "./utils_events";
 import { getLine, lineAtHeight } from "./utils_line";
 import { clipPos } from "./utils_pos";
 

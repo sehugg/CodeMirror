@@ -5,8 +5,9 @@ import Pos from "./Pos";
 import { collapsedSpanAtEnd, heightAtLine, lineIsHidden, visualLine } from "./spans";
 import { ie, ie_version } from "./sniffs";
 import { updateLineForChanges } from "./update_line";
-import { isExtendingChar, scrollerGap } from "./utils";
+import { countColumn, isExtendingChar, scrollerGap } from "./utils";
 import { bidiLeft, bidiRight, bidiOther, getBidiPartAt, getOrder, lineLeft, lineRight, moveVisually } from "./utils_bidi";
+import { e_target } from "./utils_events";
 import { getLine, lineAtHeight, lineNo, updateLineHeight } from "./utils_line";
 import { clipPos } from "./utils_pos";
 import { widgetHeight } from "./utils_widgets";
@@ -543,4 +544,25 @@ export function estimateLineHeights(cm) {
     var estHeight = est(line);
     if (estHeight != line.height) updateLineHeight(line, estHeight);
   });
+}
+
+// Given a mouse event, find the corresponding position. If liberal
+// is false, it checks whether a gutter or scrollbar was clicked,
+// and returns null if it was. forRect is used by rectangular
+// selections, and tries to estimate a character position even for
+// coordinates beyond the right of the text.
+export function posFromMouse(cm, e, liberal, forRect) {
+  var display = cm.display;
+  if (!liberal && e_target(e).getAttribute("cm-not-content") == "true") return null;
+
+  var x, y, space = display.lineSpace.getBoundingClientRect();
+  // Fails unpredictably on IE[67] when mouse is dragged around quickly.
+  try { x = e.clientX - space.left; y = e.clientY - space.top; }
+  catch (e) { return null; }
+  var coords = coordsChar(cm, x, y), line;
+  if (forRect && coords.xRel == 1 && (line = getLine(cm.doc, coords.line).text).length == coords.ch) {
+    var colDiff = countColumn(line, line.length, cm.options.tabSize) - line.length;
+    coords = Pos(coords.line, Math.max(0, Math.round((x - paddingH(cm.display).left) / charWidth(cm.display)) - colDiff));
+  }
+  return coords;
 }

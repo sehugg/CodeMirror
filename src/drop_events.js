@@ -2,12 +2,13 @@ import { changeEnd, makeChange, replaceRange } from "./changes";
 import { elt, removeChildrenAndAdd } from "./dom_utils";
 import { signalDOMEvent } from "./events";
 import { operation } from "./operations";
+import { posFromMouse } from "./position_measurement";
 import { simpleSelection } from "./selection";
 import { drawSelectionCursor } from "./selection_draw";
 import { setSelectionNoUndo, setSelectionReplaceHistory } from "./selection_updates";
 import { ie, presto, safari } from "./sniffs";
 import { indexOf } from "./utils";
-import { e_preventDefault, e_stop, eventInWidget, posFromMouse } from "./utils_events";
+import { e_preventDefault, e_stop, eventInWidget } from "./utils_events";
 import { clipPos } from "./utils_pos";
 
 // Kludge to work around strange IE behavior where it'll sometimes

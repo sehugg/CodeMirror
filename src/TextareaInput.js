@@ -3,13 +3,13 @@ import { off, on, signalDOMEvent } from "./events";
 import { hasCopyEvent, hasSelection } from "./feature_detection";
 import { applyTextInput, copyableRanges, handlePaste, hiddenTextarea, lastCopied, setLastCopied } from "./input";
 import { operation, runInOp } from "./operations";
-import { cursorCoords } from "./position_measurement";
+import { cursorCoords, posFromMouse } from "./position_measurement";
 import { simpleSelection } from "./selection";
 import { prepareSelection } from "./selection_draw";
 import { selectAll, setSelection } from "./selection_updates";
 import { captureRightClick, ie, ie_version, ios, mac, mobile, presto, webkit } from "./sniffs";
 import { copyObj, Delayed, nothing, sel_dontScroll } from "./utils";
-import { e_preventDefault, e_stop, eventInWidget, posFromMouse } from "./utils_events";
+import { e_preventDefault, e_stop, eventInWidget } from "./utils_events";
 
 // TEXTAREA INPUT STYLE
 

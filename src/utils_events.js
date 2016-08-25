@@ -1,8 +1,4 @@
 import { mac } from "./sniffs";
-import Pos from "./Pos";
-import { charWidth, coordsChar, paddingH } from "./position_measurement";
-import { countColumn } from "./utils";
-import { getLine } from "./utils_line";
 
 // Due to the fact that we still support jurassic IE versions, some
 // compatibility wrappers are needed.
@@ -39,25 +35,4 @@ export function eventInWidget(display, e) {
         (n.parentNode == display.sizer && n != display.mover))
       return true;
   }
-}
-
-// Given a mouse event, find the corresponding position. If liberal
-// is false, it checks whether a gutter or scrollbar was clicked,
-// and returns null if it was. forRect is used by rectangular
-// selections, and tries to estimate a character position even for
-// coordinates beyond the right of the text.
-export function posFromMouse(cm, e, liberal, forRect) {
-  var display = cm.display;
-  if (!liberal && e_target(e).getAttribute("cm-not-content") == "true") return null;
-
-  var x, y, space = display.lineSpace.getBoundingClientRect();
-  // Fails unpredictably on IE[67] when mouse is dragged around quickly.
-  try { x = e.clientX - space.left; y = e.clientY - space.top; }
-  catch (e) { return null; }
-  var coords = coordsChar(cm, x, y), line;
-  if (forRect && coords.xRel == 1 && (line = getLine(cm.doc, coords.line).text).length == coords.ch) {
-    var colDiff = countColumn(line, line.length, cm.options.tabSize) - line.length;
-    coords = Pos(coords.line, Math.max(0, Math.round((x - paddingH(cm.display).left) / charWidth(cm.display)) - colDiff));
-  }
-  return coords;
 }
