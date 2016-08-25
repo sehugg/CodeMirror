@@ -1,8 +1,9 @@
 import { commands } from "./commands";
 import { activeElt, addClass, rmClass } from "./dom_utils";
-import { off, on, signalDOMEvent, signalLater } from "./events";
+import { off, on, signalDOMEvent } from "./events";
 import { hasCopyEvent } from "./feature_detection";
 import { isModifierKey, keyName, lookupKey } from "./keymap";
+import { signalLater } from "./operations";
 import { restartBlink } from "./selection_draw";
 import { ie, ie_version, mac, presto } from "./sniffs";
 import { Delayed, Pass } from "./utils";

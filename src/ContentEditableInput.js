@@ -11,8 +11,8 @@ import { prepareSelection } from "./selection_draw";
 import { setSelection } from "./selection_updates";
 import { gecko, ie_version } from "./sniffs";
 import { copyObj, Delayed, lst, nothing, sel_dontScroll } from "./utils";
-import { getBidiPartAt } from "./utils_bidi";
-import { getBetween, getLine, getOrder, lineNo } from "./utils_line";
+import { getBidiPartAt, getOrder } from "./utils_bidi";
+import { getBetween, getLine, lineNo } from "./utils_line";
 import { findViewIndex, regChange } from "./view_tracking";
 
 // CONTENTEDITABLE INPUT STYLE

@@ -1,5 +1,6 @@
-import { hasHandler, signal, signalCursorActivity, signalLater } from "./events";
+import { hasHandler, signal, signalCursorActivity } from "./events";
 import { addSelectionToHistory } from "./history";
+import { signalLater } from "./operations";
 import Pos from "./Pos";
 import { cmp } from "./Pos";
 import { ensureCursorVisible } from "./scrolling";

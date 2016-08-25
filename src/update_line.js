@@ -1,6 +1,6 @@
 import { elt } from "./dom_utils";
-import { signalLater } from "./events";
 import { buildLineContent } from "./line_data";
+import { signalLater } from "./operations";
 import { ie, ie_version } from "./sniffs";
 import { lineNumberFor } from "./utils_line";
 

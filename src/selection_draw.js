@@ -3,8 +3,8 @@ import Pos from "./Pos";
 import { charCoords, cursorCoords, displayWidth, paddingH } from "./position_measurement";
 import { visualLine } from "./spans";
 import { countColumn } from "./utils";
-import { iterateBidiSections } from "./utils_bidi";
-import { getLine, getOrder } from "./utils_line";
+import { getOrder, iterateBidiSections } from "./utils_bidi";
+import { getLine } from "./utils_line";
 
 
 // SELECTION DRAWING

@@ -5,7 +5,8 @@ import { getLineStyles } from "./highlight";
 import { ie, ie_version, webkit } from "./sniffs";
 import { attachMarkedSpans, compareCollapsedMarkers, detachMarkedSpans } from "./spans";
 import { spaceStr } from "./utils";
-import { getOrder, lineNo, updateLineHeight } from "./utils_line";
+import { lineNo, updateLineHeight } from "./utils_line";
+import { getOrder } from "./utils_bidi";
 
 // LINE DATA STRUCTURE
 

@@ -1,4 +1,4 @@
-import { signal } from "./events";
+import { getHandlers, signal } from "./events";
 import { activeElt } from "./dom_utils";
 import { ensureFocus } from "./focus";
 import { alignHorizontally } from "./line_numbers";
@@ -19,7 +19,7 @@ import { clipPos } from "./utils_pos";
 // error-prone). Instead, display updates are batched and then all
 // combined and executed at once.
 
-export var operationGroup = null;
+var operationGroup = null;
 
 var nextOpId = 0;
 // Start a new operation.
@@ -240,4 +240,36 @@ export function docMethodOp(f) {
     try { return f.apply(this, arguments); }
     finally { endOperation(cm); }
   };
+}
+
+var orphanDelayedCallbacks = null;
+
+// Often, we want to signal events at a point where we are in the
+// middle of some work, but don't want the handler to start calling
+// other methods on the editor, which might be in an inconsistent
+// state or simply not expect any other events to happen.
+// signalLater looks whether there are any handlers, and schedules
+// them to be executed when the last operation ends, or, if no
+// operation is active, when a timeout fires.
+export function signalLater(emitter, type /*, values...*/) {
+  var arr = getHandlers(emitter, type, false)
+  if (!arr.length) return;
+  var args = Array.prototype.slice.call(arguments, 2), list;
+  if (operationGroup) {
+    list = operationGroup.delayedCallbacks;
+  } else if (orphanDelayedCallbacks) {
+    list = orphanDelayedCallbacks;
+  } else {
+    list = orphanDelayedCallbacks = [];
+    setTimeout(fireOrphanDelayed, 0);
+  }
+  function bnd(f) {return function(){f.apply(null, args);};}
+  for (var i = 0; i < arr.length; ++i)
+    list.push(bnd(arr[i]));
+}
+
+function fireOrphanDelayed() {
+  var delayed = orphanDelayedCallbacks;
+  orphanDelayedCallbacks = null;
+  for (var i = 0; i < delayed.length; ++i) delayed[i]();
 }

@@ -1,7 +1,4 @@
-import Pos from "./Pos";
-import { collapsedSpanAtEnd, visualLine } from "./spans";
 import { isExtendingChar, lst } from "./utils";
-import { getLine, getOrder, lineNo } from "./utils_line";
 
 // BIDI HELPERS
 
@@ -26,36 +23,6 @@ export function lineRight(line) {
   var order = getOrder(line);
   if (!order) return line.text.length;
   return bidiRight(lst(order));
-}
-
-export function lineStart(cm, lineN) {
-  var line = getLine(cm.doc, lineN);
-  var visual = visualLine(line);
-  if (visual != line) lineN = lineNo(visual);
-  var order = getOrder(visual);
-  var ch = !order ? 0 : order[0].level % 2 ? lineRight(visual) : lineLeft(visual);
-  return Pos(lineN, ch);
-}
-export function lineEnd(cm, lineN) {
-  var merged, line = getLine(cm.doc, lineN);
-  while (merged = collapsedSpanAtEnd(line)) {
-    line = merged.find(1, true).line;
-    lineN = null;
-  }
-  var order = getOrder(line);
-  var ch = !order ? line.text.length : order[0].level % 2 ? lineLeft(line) : lineRight(line);
-  return Pos(lineN == null ? lineNo(line) : lineN, ch);
-}
-export function lineStartSmart(cm, pos) {
-  var start = lineStart(cm, pos.line);
-  var line = getLine(cm.doc, start.line);
-  var order = getOrder(line);
-  if (!order || order[0].level == 0) {
-    var firstNonWS = Math.max(0, line.text.search(/\S/));
-    var inWS = pos.line == start.line && pos.ch <= firstNonWS && pos.ch;
-    return Pos(start.line, inWS ? 0 : firstNonWS);
-  }
-  return start;
 }
 
 function compareBidiLevel(order, a, b) {
@@ -296,3 +263,12 @@ export var bidiOrdering = (function() {
     return order;
   };
 })();
+
+// Get the bidi ordering for the given line (and cache it). Returns
+// false for lines that are fully left-to-right, and an array of
+// BidiSpan objects otherwise.
+export function getOrder(line) {
+  var order = line.order;
+  if (order == null) order = line.order = bidiOrdering(line.text);
+  return order;
+}

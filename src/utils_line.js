@@ -1,7 +1,4 @@
-import { indexOf } from "./utils"
-import { bidiOrdering } from "./utils_bidi";
-import { clipLine } from "./utils_pos";
-import { regLineChange } from "./view_tracking";
+import { indexOf } from "./utils";
 
 // LINE UTILITIES
 
@@ -79,27 +76,6 @@ export function lineAtHeight(chunk, h) {
     h -= lh;
   }
   return n + i;
-}
-
-// Get the bidi ordering for the given line (and cache it). Returns
-// false for lines that are fully left-to-right, and an array of
-// BidiSpan objects otherwise.
-export function getOrder(line) {
-  var order = line.order;
-  if (order == null) order = line.order = bidiOrdering(line.text);
-  return order;
-}
-
-// Utility for applying a change to a line by handle or number,
-// returning the number and optionally registering the line as
-// changed.
-export function changeLine(doc, handle, changeType, op) {
-  var no = handle, line = handle;
-  if (typeof handle == "number") line = getLine(doc, clipLine(doc, handle));
-  else no = lineNo(handle);
-  if (no == null) return null;
-  if (op(line, no) && doc.cm) regLineChange(doc.cm, no, changeType);
-  return line;
 }
 
 export function isLine(doc, l) {return l >= doc.first && l < doc.first + doc.size;}

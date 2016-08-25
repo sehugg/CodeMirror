@@ -1,8 +1,8 @@
 import { linkedDocs } from "./document_data";
 import { elt } from "./dom_utils";
-import { eventMixin, hasHandler, on, signalLater } from "./events";
+import { eventMixin, hasHandler, on } from "./events";
 import { addChangeToHistory } from "./history";
-import { endOperation, operation, runInOp, startOperation } from "./operations";
+import { endOperation, operation, runInOp, signalLater, startOperation } from "./operations";
 import Pos from "./Pos";
 import { cmp } from "./Pos";
 import { clearLineMeasurementCacheFor, findViewForLine, textHeight } from "./position_measurement";

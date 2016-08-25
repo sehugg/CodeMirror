@@ -1,5 +1,5 @@
 import CodeMirror from "./CodeMirror";
-import { computeReplacedSel, makeChange, makeChangeFromHistory, replaceRange } from "./changes";
+import { changeLine, computeReplacedSel, makeChange, makeChangeFromHistory, replaceRange } from "./changes";
 import { BranchChunk, LeafChunk, linkedDocs, updateDoc } from "./document_data";
 import { classTest } from "./dom_utils";
 import { splitLinesAuto } from "./feature_detection";
@@ -13,7 +13,7 @@ import { ensureCursorVisible } from "./scrolling";
 import { Range } from "./selection";
 import { visualLine } from "./spans";
 import { createObj, indexOf, lst } from "./utils";
-import { changeLine, getBetween, getLine, getLines, isLine, lineNo } from "./utils_line";
+import { getBetween, getLine, getLines, isLine, lineNo } from "./utils_line";
 import { clipPos, clipPosArray } from "./utils_pos";
 
 import { Line } from "./line_data";

@@ -1,13 +1,14 @@
 import { deleteNearSelection, indentLine } from "./api_utilities";
+import { changeLine } from "./changes";
 import { commands } from "./commands";
 import { attachDoc } from "./document_data";
 import { activeElt, addClass, rmClass } from "./dom_utils";
-import { eventMixin, signal, signalLater } from "./events";
+import { eventMixin, signal } from "./events";
 import { getLineStyles, getStateBefore, takeToken } from "./highlight";
 import { triggerElectric } from "./input";
 import { onKeyDown, onKeyPress, onKeyUp } from "./key_events";
 import { getKeyMap } from "./keymap";
-import { methodOp, operation, runInOp } from "./operations";
+import { methodOp, operation, runInOp, signalLater } from "./operations";
 import Pos from "./Pos";
 import { cmp } from "./Pos";
 import { charCoords, charWidth, clearCaches, clearLineMeasurementCache, coordsChar, cursorCoords, displayHeight, displayWidth, estimateLineHeights, fromCoordSystem, intoCoordSystem, scrollGap, textHeight } from "./position_measurement";
@@ -18,7 +19,7 @@ import { heightAtLine } from "./spans";
 import { updateGutterSpace } from "./update_display";
 import { indexOf, insertSorted, isEmpty, isWordChar, sel_dontScroll, sel_move } from "./utils";
 import { lineLeft, lineRight, moveLogically, moveVisually } from "./utils_bidi";
-import { changeLine, getLine, isLine, lineAtHeight, lineNo } from "./utils_line";
+import { getLine, isLine, lineAtHeight, lineNo } from "./utils_line";
 import { clipLine, clipPos } from "./utils_pos";
 import { regChange, regLineChange } from "./view_tracking";
 

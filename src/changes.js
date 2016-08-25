@@ -1,8 +1,8 @@
 import { isWholeLineUpdate, linkedDocs, updateDoc } from "./document_data";
-import { hasHandler, signal, signalCursorActivity, signalLater } from "./events";
+import { hasHandler, signal, signalCursorActivity } from "./events";
 import { startWorker } from "./highlight";
 import { addChangeToHistory, historyChangeFromChange, mergeOldSpans, pushSelectionToHistory } from "./history";
-import { operation } from "./operations";
+import { operation, signalLater } from "./operations";
 import Pos from "./Pos";
 import { cmp } from "./Pos";
 import { estimateHeight } from "./position_measurement";
@@ -12,7 +12,7 @@ import { setSelection, setSelectionNoUndo } from "./selection_updates";
 import { lineLength, removeReadOnlyRanges, stretchSpansOverChange, visualLine } from "./spans";
 import { indexOf, lst, map, sel_dontScroll } from "./utils";
 import { getBetween, getLine, lineNo } from "./utils_line";
-import { clipPos } from "./utils_pos";
+import { clipLine, clipPos } from "./utils_pos";
 import { regChange, regLineChange } from "./view_tracking";
 
 // UPDATING
@@ -370,4 +370,16 @@ function rebaseHist(hist, change) {
   var from = change.from.line, to = change.to.line, diff = change.text.length - (to - from) - 1;
   rebaseHistArray(hist.done, from, to, diff);
   rebaseHistArray(hist.undone, from, to, diff);
+}
+
+// Utility for applying a change to a line by handle or number,
+// returning the number and optionally registering the line as
+// changed.
+export function changeLine(doc, handle, changeType, op) {
+  var no = handle, line = handle;
+  if (typeof handle == "number") line = getLine(doc, clipLine(doc, handle));
+  else no = lineNo(handle);
+  if (no == null) return null;
+  if (op(line, no) && doc.cm) regLineChange(doc.cm, no, changeType);
+  return line;
 }

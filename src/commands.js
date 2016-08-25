@@ -4,9 +4,10 @@ import Pos from "./Pos";
 import { ensureCursorVisible } from "./scrolling";
 import { Range } from "./selection";
 import { selectAll } from "./selection_updates";
+import { collapsedSpanAtEnd, visualLine } from "./spans";
 import { countColumn, sel_dontScroll, sel_move, spaceStr } from "./utils";
-import { lineEnd, lineStart, lineStartSmart } from "./utils_bidi";
-import { getLine } from "./utils_line";
+import { getOrder, lineLeft, lineRight } from "./utils_bidi";
+import { getLine, lineNo } from "./utils_line";
 import { clipPos } from "./utils_pos";
 
 // Commands are parameter-less actions that can be performed on an
@@ -167,3 +168,33 @@ export var commands = {
   toggleOverwrite: function(cm) {cm.toggleOverwrite();}
 };
 
+
+function lineStart(cm, lineN) {
+  var line = getLine(cm.doc, lineN);
+  var visual = visualLine(line);
+  if (visual != line) lineN = lineNo(visual);
+  var order = getOrder(visual);
+  var ch = !order ? 0 : order[0].level % 2 ? lineRight(visual) : lineLeft(visual);
+  return Pos(lineN, ch);
+}
+function lineEnd(cm, lineN) {
+  var merged, line = getLine(cm.doc, lineN);
+  while (merged = collapsedSpanAtEnd(line)) {
+    line = merged.find(1, true).line;
+    lineN = null;
+  }
+  var order = getOrder(line);
+  var ch = !order ? line.text.length : order[0].level % 2 ? lineLeft(line) : lineRight(line);
+  return Pos(lineN == null ? lineNo(line) : lineN, ch);
+}
+function lineStartSmart(cm, pos) {
+  var start = lineStart(cm, pos.line);
+  var line = getLine(cm.doc, start.line);
+  var order = getOrder(line);
+  if (!order || order[0].level == 0) {
+    var firstNonWS = Math.max(0, line.text.search(/\S/));
+    var inWS = pos.line == start.line && pos.ch <= firstNonWS && pos.ch;
+    return Pos(start.line, inWS ? 0 : firstNonWS);
+  }
+  return start;
+}

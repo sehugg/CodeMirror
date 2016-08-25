@@ -6,8 +6,8 @@ import { collapsedSpanAtEnd, heightAtLine, lineIsHidden, visualLine } from "./sp
 import { ie, ie_version } from "./sniffs";
 import { updateLineForChanges } from "./update_line";
 import { isExtendingChar, scrollerGap } from "./utils";
-import { bidiLeft, bidiRight, bidiOther, getBidiPartAt, lineLeft, lineRight, moveVisually } from "./utils_bidi";
-import { getLine, getOrder, lineAtHeight, lineNo, updateLineHeight } from "./utils_line";
+import { bidiLeft, bidiRight, bidiOther, getBidiPartAt, getOrder, lineLeft, lineRight, moveVisually } from "./utils_bidi";
+import { getLine, lineAtHeight, lineNo, updateLineHeight } from "./utils_line";
 import { clipPos } from "./utils_pos";
 import { widgetHeight } from "./utils_widgets";
 import { findViewIndex, LineView } from "./view_tracking";

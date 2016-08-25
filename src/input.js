@@ -1,8 +1,7 @@
 import { indentLine } from "./api_utilities";
 import { makeChange } from "./changes";
 import { elt } from "./dom_utils";
-import { signalLater } from "./events";
-import { runInOp } from "./operations";
+import { runInOp, signalLater } from "./operations";
 import Pos from "./Pos";
 import { ensureCursorVisible } from "./scrolling";
 import { ios, webkit } from "./sniffs";

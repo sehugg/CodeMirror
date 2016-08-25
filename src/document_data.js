@@ -1,5 +1,5 @@
-import { signalLater } from "./events";
 import { cleanUpLine, Line, updateLine } from "./line_data";
+import { signalLater } from "./operations";
 import { estimateLineHeights } from "./position_measurement";
 import { findMaxLine } from "./spans";
 import { loadMode } from "./state";

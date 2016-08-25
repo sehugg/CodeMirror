@@ -1,4 +1,3 @@
-import { operationGroup } from "./operations";
 import { indexOf } from "./utils";
 import { e_defaultPrevented } from "./utils_events";
 
@@ -20,7 +19,7 @@ export var on = function(emitter, type, f) {
 };
 
 var noHandlers = []
-function getHandlers(emitter, type, copy) {
+export function getHandlers(emitter, type, copy) {
   var arr = emitter._handlers && emitter._handlers[type]
   if (copy) return arr && arr.length > 0 ? arr.slice() : noHandlers
   else return arr || noHandlers
@@ -43,38 +42,6 @@ export function signal(emitter, type /*, values...*/) {
   if (!handlers.length) return;
   var args = Array.prototype.slice.call(arguments, 2);
   for (var i = 0; i < handlers.length; ++i) handlers[i].apply(null, args);
-}
-
-var orphanDelayedCallbacks = null;
-
-// Often, we want to signal events at a point where we are in the
-// middle of some work, but don't want the handler to start calling
-// other methods on the editor, which might be in an inconsistent
-// state or simply not expect any other events to happen.
-// signalLater looks whether there are any handlers, and schedules
-// them to be executed when the last operation ends, or, if no
-// operation is active, when a timeout fires.
-export function signalLater(emitter, type /*, values...*/) {
-  var arr = getHandlers(emitter, type, false)
-  if (!arr.length) return;
-  var args = Array.prototype.slice.call(arguments, 2), list;
-  if (operationGroup) {
-    list = operationGroup.delayedCallbacks;
-  } else if (orphanDelayedCallbacks) {
-    list = orphanDelayedCallbacks;
-  } else {
-    list = orphanDelayedCallbacks = [];
-    setTimeout(fireOrphanDelayed, 0);
-  }
-  function bnd(f) {return function(){f.apply(null, args);};}
-  for (var i = 0; i < arr.length; ++i)
-    list.push(bnd(arr[i]));
-}
-
-function fireOrphanDelayed() {
-  var delayed = orphanDelayedCallbacks;
-  orphanDelayedCallbacks = null;
-  for (var i = 0; i < delayed.length; ++i) delayed[i]();
 }
 
 // The DOM events that CodeMirror handles can be overridden by
