@@ -1,10 +1,10 @@
-import { callBlankLine, readToken, runMode } from "./line_data";
 import { runInOp } from "./operations";
 import { findStartLine } from "./selection_draw";
-import { copyState, startState } from "./state";
+import { copyState, innerMode, startState } from "./state";
 import StringStream from "./StringStream";
 import { bind } from "./utils";
 import { getLine, lineNo } from "./utils_line";
+import { clipPos } from "./utils_pos";
 import { regLineChange } from "./view_tracking";
 
 // HIGHLIGHT WORKER
@@ -126,7 +126,7 @@ export function getStateBefore(cm, n, precise) {
 // Lightweight form of highlight -- proceed over this line and
 // update state, but don't save a style array. Used for lines that
 // aren't currently visible.
-export function processLine(cm, text, state, startAt) {
+function processLine(cm, text, state, startAt) {
   var mode = cm.doc.mode;
   var stream = new StringStream(text, cm.options.tabSize);
   stream.start = stream.pos = startAt || 0;
@@ -134,5 +134,95 @@ export function processLine(cm, text, state, startAt) {
   while (!stream.eol()) {
     readToken(mode, stream, state);
     stream.start = stream.pos;
+  }
+}
+
+function callBlankLine(mode, state) {
+  if (mode.blankLine) return mode.blankLine(state);
+  if (!mode.innerMode) return;
+  var inner = innerMode(mode, state);
+  if (inner.mode.blankLine) return inner.mode.blankLine(inner.state);
+}
+
+export function readToken(mode, stream, state, inner) {
+  for (var i = 0; i < 10; i++) {
+    if (inner) inner[0] = innerMode(mode, state).mode;
+    var style = mode.token(stream, state);
+    if (stream.pos > stream.start) return style;
+  }
+  throw new Error("Mode " + mode.name + " failed to advance stream.");
+}
+
+// Utility for getTokenAt and getLineTokens
+export function takeToken(cm, pos, precise, asArray) {
+  function getObj(copy) {
+    return {start: stream.start, end: stream.pos,
+            string: stream.current(),
+            type: style || null,
+            state: copy ? copyState(doc.mode, state) : state};
+  }
+
+  var doc = cm.doc, mode = doc.mode, style;
+  pos = clipPos(doc, pos);
+  var line = getLine(doc, pos.line), state = getStateBefore(cm, pos.line, precise);
+  var stream = new StringStream(line.text, cm.options.tabSize), tokens;
+  if (asArray) tokens = [];
+  while ((asArray || stream.pos < pos.ch) && !stream.eol()) {
+    stream.start = stream.pos;
+    style = readToken(mode, stream, state);
+    if (asArray) tokens.push(getObj(true));
+  }
+  return asArray ? tokens : getObj();
+}
+
+function extractLineClasses(type, output) {
+  if (type) for (;;) {
+    var lineClass = type.match(/(?:^|\s+)line-(background-)?(\S+)/);
+    if (!lineClass) break;
+    type = type.slice(0, lineClass.index) + type.slice(lineClass.index + lineClass[0].length);
+    var prop = lineClass[1] ? "bgClass" : "textClass";
+    if (output[prop] == null)
+      output[prop] = lineClass[2];
+    else if (!(new RegExp("(?:^|\s)" + lineClass[2] + "(?:$|\s)")).test(output[prop]))
+      output[prop] += " " + lineClass[2];
+  }
+  return type;
+}
+
+// Run the given mode's parser over a line, calling f for each token.
+function runMode(cm, text, mode, state, f, lineClasses, forceToEnd) {
+  var flattenSpans = mode.flattenSpans;
+  if (flattenSpans == null) flattenSpans = cm.options.flattenSpans;
+  var curStart = 0, curStyle = null;
+  var stream = new StringStream(text, cm.options.tabSize), style;
+  var inner = cm.options.addModeClass && [null];
+  if (text == "") extractLineClasses(callBlankLine(mode, state), lineClasses);
+  while (!stream.eol()) {
+    if (stream.pos > cm.options.maxHighlightLength) {
+      flattenSpans = false;
+      if (forceToEnd) processLine(cm, text, state, stream.pos);
+      stream.pos = text.length;
+      style = null;
+    } else {
+      style = extractLineClasses(readToken(mode, stream, state, inner), lineClasses);
+    }
+    if (inner) {
+      var mName = inner[0].name;
+      if (mName) style = "m-" + (style ? mName + " " + style : mName);
+    }
+    if (!flattenSpans || curStyle != style) {
+      while (curStart < stream.start) {
+        curStart = Math.min(stream.start, curStart + 50000);
+        f(curStart, curStyle);
+      }
+      curStyle = style;
+    }
+    stream.start = stream.pos;
+  }
+  while (curStart < stream.pos) {
+    // Webkit seems to refuse to render text nodes longer than 57444 characters
+    var pos = Math.min(stream.pos, curStart + 50000);
+    f(pos, curStyle);
+    curStart = pos;
   }
 }
