@@ -1,7 +1,8 @@
-import { getHandlers, signal } from "./events";
+import { signal } from "./events";
 import { activeElt } from "./dom_utils";
 import { ensureFocus } from "./focus";
 import { alignHorizontally } from "./line_numbers";
+import { finishOperation, pushOperation } from "./operation_group";
 import { displayWidth, measureChar, scrollGap } from "./position_measurement";
 import { measureForScrollbars, updateScrollbars } from "./scrollbars";
 import { setScrollLeft } from "./scroll_events";
@@ -19,8 +20,6 @@ import { clipPos } from "./utils_pos";
 // cursor and display (which would be awkward, slow, and
 // error-prone). Instead, display updates are batched and then all
 // combined and executed at once.
-
-var operationGroup = null;
 
 var nextOpId = 0;
 // Start a new operation.
@@ -42,44 +41,17 @@ export function startOperation(cm) {
     focus: false,
     id: ++nextOpId           // Unique ID
   };
-  if (operationGroup) {
-    operationGroup.ops.push(cm.curOp);
-  } else {
-    cm.curOp.ownsGroup = operationGroup = {
-      ops: [cm.curOp],
-      delayedCallbacks: []
-    };
-  }
-}
-
-function fireCallbacksForOps(group) {
-  // Calls delayed callbacks and cursorActivity handlers until no
-  // new ones appear
-  var callbacks = group.delayedCallbacks, i = 0;
-  do {
-    for (; i < callbacks.length; i++)
-      callbacks[i].call(null);
-    for (var j = 0; j < group.ops.length; j++) {
-      var op = group.ops[j];
-      if (op.cursorActivityHandlers)
-        while (op.cursorActivityCalled < op.cursorActivityHandlers.length)
-          op.cursorActivityHandlers[op.cursorActivityCalled++].call(null, op.cm);
-    }
-  } while (i < callbacks.length);
+  pushOperation(cm.curOp);
 }
 
 // Finish an operation, updating the display and signalling delayed events
 export function endOperation(cm) {
-  var op = cm.curOp, group = op.ownsGroup;
-  if (!group) return;
-
-  try { fireCallbacksForOps(group); }
-  finally {
-    operationGroup = null;
+  var op = cm.curOp;
+  finishOperation(op, function(group) {
     for (var i = 0; i < group.ops.length; i++)
       group.ops[i].cm.curOp = null;
     endOperations(group);
-  }
+  });
 }
 
 // The DOM updates done when an operation finishes are batched so
@@ -243,34 +215,4 @@ export function docMethodOp(f) {
   };
 }
 
-var orphanDelayedCallbacks = null;
-
-// Often, we want to signal events at a point where we are in the
-// middle of some work, but don't want the handler to start calling
-// other methods on the editor, which might be in an inconsistent
-// state or simply not expect any other events to happen.
-// signalLater looks whether there are any handlers, and schedules
-// them to be executed when the last operation ends, or, if no
-// operation is active, when a timeout fires.
-export function signalLater(emitter, type /*, values...*/) {
-  var arr = getHandlers(emitter, type, false)
-  if (!arr.length) return;
-  var args = Array.prototype.slice.call(arguments, 2), list;
-  if (operationGroup) {
-    list = operationGroup.delayedCallbacks;
-  } else if (orphanDelayedCallbacks) {
-    list = orphanDelayedCallbacks;
-  } else {
-    list = orphanDelayedCallbacks = [];
-    setTimeout(fireOrphanDelayed, 0);
-  }
-  function bnd(f) {return function(){f.apply(null, args);};}
-  for (var i = 0; i < arr.length; ++i)
-    list.push(bnd(arr[i]));
-}
-
-function fireOrphanDelayed() {
-  var delayed = orphanDelayedCallbacks;
-  orphanDelayedCallbacks = null;
-  for (var i = 0; i < delayed.length; ++i) delayed[i]();
-}
+export { signalLater } from "./operation_group";
