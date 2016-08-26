@@ -1,7 +1,7 @@
 import CodeMirror from "./CodeMirror";
 import { changeLine, computeReplacedSel, makeChange, makeChangeFromHistory, replaceRange } from "./changes";
 import { BranchChunk, LeafChunk, linkedDocs, updateDoc } from "./document_data";
-import { classTest } from "./dom_utils";
+import { classTest } from "./util/dom";
 import { splitLinesAuto } from "./feature_detection";
 import { History } from "./history";
 import { addLineWidget } from "./line_widget";
@@ -12,7 +12,7 @@ import { cmp } from "./Pos";
 import { ensureCursorVisible } from "./scrolling";
 import { Range } from "./selection";
 import { visualLine } from "./spans";
-import { createObj, indexOf, lst } from "./utils";
+import { createObj, indexOf, lst } from "./util/misc";
 import { getBetween, getLine, getLines, isLine, lineNo } from "./utils_line";
 import { clipPos, clipPosArray } from "./utils_pos";
 
@@ -20,7 +20,7 @@ import { Line } from "./line_data";
 import { normalizeSelection, Selection } from "./selection";
 import { simpleSelection } from "./selection";
 import { extendSelection, extendSelections, setSelection, setSelectionReplaceHistory, setSimpleSelection } from "./selection_updates";
-import { map, sel_dontScroll } from "./utils";
+import { map, sel_dontScroll } from "./util/misc";
 
 var nextDocId = 0;
 var Doc = function(text, mode, firstLine, lineSep) {

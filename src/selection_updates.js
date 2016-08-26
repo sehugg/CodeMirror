@@ -1,11 +1,11 @@
-import { hasHandler, signal, signalCursorActivity } from "./events";
+import { hasHandler, signal, signalCursorActivity } from "./util/event";
 import { addSelectionToHistory } from "./history";
 import { signalLater } from "./operations";
 import Pos from "./Pos";
 import { cmp } from "./Pos";
 import { ensureCursorVisible } from "./scrolling";
 import { normalizeSelection, Range, Selection, simpleSelection } from "./selection";
-import { lst, sel_dontScroll } from "./utils";
+import { lst, sel_dontScroll } from "./util/misc";
 import { getLine } from "./utils_line";
 import { clipPos } from "./utils_pos";
 

@@ -1,5 +1,5 @@
-import { elt, range, removeChildren, removeChildrenAndAdd } from "./dom_utils";
-import { ie, ie_version } from "./sniffs";
+import { elt, range, removeChildren, removeChildrenAndAdd } from "./util/dom";
+import { ie, ie_version } from "./util/browser";
 
 // FEATURE DETECTION
 

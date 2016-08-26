@@ -1,6 +1,6 @@
 import { sawCollapsedSpans } from "./saw_special_spans";
 import { lineIsHidden, visualLineContinued, visualLineEndNo, visualLineNo } from "./spans";
-import { indexOf, lst } from "./utils";
+import { indexOf, lst } from "./util/misc";
 import { getLine, lineNo } from "./utils_line";
 
 // VIEW TRACKING

@@ -1,5 +1,5 @@
-import { signal } from "./events";
-import { activeElt } from "./dom_utils";
+import { signal } from "./util/event";
+import { activeElt } from "./util/dom";
 import { ensureFocus } from "./focus";
 import { alignHorizontally } from "./line_numbers";
 import { finishOperation, pushOperation } from "./operation_group";

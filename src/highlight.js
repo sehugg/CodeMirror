@@ -1,6 +1,6 @@
 import { copyState, innerMode, startState } from "./modes";
 import StringStream from "./StringStream";
-import { countColumn } from "./utils";
+import { countColumn } from "./util/misc";
 import { getLine, lineNo } from "./utils_line";
 import { clipPos } from "./utils_pos";
 

@@ -1,7 +1,7 @@
-import { elt } from "./dom_utils";
+import { elt } from "./util/dom";
 import { buildLineContent } from "./line_data";
 import { signalLater } from "./operation_group";
-import { ie, ie_version } from "./sniffs";
+import { ie, ie_version } from "./util/browser";
 import { lineNumberFor } from "./utils_line";
 
 // When an aspect of a line changes, a string is added to

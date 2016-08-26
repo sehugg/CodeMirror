@@ -1,4 +1,4 @@
-import { indexOf } from "./utils";
+import { indexOf } from "./util/misc";
 
 // LINE UTILITIES
 

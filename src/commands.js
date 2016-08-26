@@ -5,8 +5,8 @@ import { ensureCursorVisible } from "./scrolling";
 import { Range } from "./selection";
 import { selectAll } from "./selection_updates";
 import { collapsedSpanAtEnd, visualLine } from "./spans";
-import { countColumn, sel_dontScroll, sel_move, spaceStr } from "./utils";
-import { getOrder, lineLeft, lineRight } from "./utils_bidi";
+import { countColumn, sel_dontScroll, sel_move, spaceStr } from "./util/misc";
+import { getOrder, lineLeft, lineRight } from "./util/bidi";
 import { getLine, lineNo } from "./utils_line";
 import { clipPos } from "./utils_pos";
 

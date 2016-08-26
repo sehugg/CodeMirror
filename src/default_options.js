@@ -1,7 +1,7 @@
 import { replaceRange } from "./changes";
 import { initScrollbars, setGuttersForLineNumbers, themeChanged, updateGutters } from "./cm_utils";
-import { addClass, rmClass } from "./dom_utils";
-import { off, on } from "./events";
+import { addClass, rmClass } from "./util/dom";
+import { off, on } from "./util/event";
 import { onBlur } from "./focus";
 import { getKeyMap } from "./keymap";
 import { defaultSpecialCharPlaceholder } from "./line_data";
@@ -10,7 +10,7 @@ import Pos from "./Pos";
 import { clearCaches, compensateForHScroll, estimateLineHeights } from "./position_measurement";
 import { updateScrollbars } from "./scrollbars";
 import { updateSelection } from "./selection_draw";
-import { mobile, windows } from "./sniffs";
+import { mobile, windows } from "./util/browser";
 import { findMaxLine } from "./spans";
 import { loadMode, resetModeState } from "./state";
 import { regChange } from "./view_tracking";

@@ -1,5 +1,5 @@
-import { indexOf } from "./utils";
-import { e_defaultPrevented } from "./utils_events";
+import { mac } from "./browser";
+import { indexOf } from "./misc";
 
 // EVENT HANDLING
 
@@ -73,3 +73,30 @@ export function eventMixin(ctor) {
   ctor.prototype.off = function(type, f) {off(this, type, f);};
 }
 
+// Due to the fact that we still support jurassic IE versions, some
+// compatibility wrappers are needed.
+
+export function e_preventDefault(e) {
+  if (e.preventDefault) e.preventDefault();
+  else e.returnValue = false;
+}
+export function e_stopPropagation(e) {
+  if (e.stopPropagation) e.stopPropagation();
+  else e.cancelBubble = true;
+}
+export function e_defaultPrevented(e) {
+  return e.defaultPrevented != null ? e.defaultPrevented : e.returnValue == false;
+}
+export function e_stop(e) {e_preventDefault(e); e_stopPropagation(e);}
+
+export function e_target(e) {return e.target || e.srcElement;}
+export function e_button(e) {
+  var b = e.which;
+  if (b == null) {
+    if (e.button & 1) b = 1;
+    else if (e.button & 2) b = 3;
+    else if (e.button & 4) b = 2;
+  }
+  if (mac && e.ctrlKey && b == 1) b = 3;
+  return b;
+}

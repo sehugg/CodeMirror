@@ -2,7 +2,7 @@
 
 import CodeMirror from "./CodeMirror";
 
-import { eventMixin, off, on } from "./events";
+import { eventMixin, off, on } from "./util/event";
 
 CodeMirror.off = off;
 CodeMirror.on = on;
@@ -11,7 +11,7 @@ import { wheelEventPixels } from "./scroll_events";
 
 CodeMirror.wheelEventPixels = wheelEventPixels;
 
-import { indexOf } from "./utils";
+import { indexOf } from "./util/misc";
 
 import { setDefaultOptions } from "./default_options";
 
@@ -37,14 +37,14 @@ import { splitLinesAuto } from "./feature_detection";
 
 CodeMirror.splitLines = splitLinesAuto;
 
-import { countColumn, findColumn, isWordCharBasic, Pass } from "./utils";
+import { countColumn, findColumn, isWordCharBasic, Pass } from "./util/misc";
 
 CodeMirror.countColumn = countColumn;
 CodeMirror.findColumn = findColumn;
 CodeMirror.isWordChar = isWordCharBasic;
 CodeMirror.Pass = Pass;
 
-import { signal } from "./events";
+import { signal } from "./util/event";
 
 CodeMirror.signal = signal;
 
@@ -141,8 +141,8 @@ CodeMirror.normalizeKeyMap = normalizeKeyMap;
 
 // FROMTEXTAREA
 
-import { activeElt } from "./dom_utils";
-import { copyObj } from "./utils";
+import { activeElt } from "./util/dom";
+import { copyObj } from "./util/misc";
 
 CodeMirror.fromTextArea = function(textarea, options) {
   options = options ? copyObj(options) : {};
@@ -214,7 +214,7 @@ CodeMirror.LineWidget = LineWidget;
 
 // EVENT UTILITIES
 
-import { e_preventDefault, e_stop, e_stopPropagation } from "./utils_events";
+import { e_preventDefault, e_stop, e_stopPropagation } from "./util/event";
 
 CodeMirror.e_preventDefault = e_preventDefault;
 CodeMirror.e_stopPropagation = e_stopPropagation;
@@ -222,7 +222,7 @@ CodeMirror.e_stop = e_stop;
 
 // DOM UTILITIES
 
-import { addClass, contains, rmClass } from "./dom_utils";
+import { addClass, contains, rmClass } from "./util/dom";
 
 CodeMirror.addClass = addClass;
 CodeMirror.contains = contains;

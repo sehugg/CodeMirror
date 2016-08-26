@@ -1,4 +1,4 @@
-import { isExtendingChar, lst } from "./utils";
+import { isExtendingChar, lst } from "./misc";
 
 // BIDI HELPERS
 

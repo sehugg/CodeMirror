@@ -1,11 +1,11 @@
 import { indentLine } from "./api_utilities";
 import { makeChange } from "./changes";
-import { elt } from "./dom_utils";
+import { elt } from "./util/dom";
 import { runInOp, signalLater } from "./operations";
 import Pos from "./Pos";
 import { ensureCursorVisible } from "./scrolling";
-import { ios, webkit } from "./sniffs";
-import { lst, map } from "./utils";
+import { ios, webkit } from "./util/browser";
+import { lst, map } from "./util/misc";
 import { getLine } from "./utils_line";
 
 // This will be set to a {lineWise: bool, text: [string]} object, so

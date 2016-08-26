@@ -1,9 +1,9 @@
-import { elt } from "./dom_utils";
-import { signalDOMEvent } from "./events";
+import { elt } from "./util/dom";
+import { signalDOMEvent } from "./util/event";
 import Pos from "./Pos";
 import { cursorCoords, displayHeight, displayWidth, estimateCoords, paddingTop, paddingVert, scrollGap, textHeight } from "./position_measurement";
 import { setScrollLeft, setScrollTop } from "./scroll_events";
-import { phantom } from "./sniffs";
+import { phantom } from "./util/browser";
 
 // SCROLLING THINGS INTO VIEW
 

@@ -1,4 +1,4 @@
-import { on } from "./events";
+import { on } from "./util/event";
 import { onBlur } from "./focus";
 
 // These must be handled carefully, because naively registering a

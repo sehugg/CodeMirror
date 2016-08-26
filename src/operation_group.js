@@ -1,4 +1,4 @@
-import { getHandlers } from "./events";
+import { getHandlers } from "./util/event";
 
 var operationGroup = null;
 

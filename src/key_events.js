@@ -1,13 +1,14 @@
 import { commands } from "./commands";
-import { activeElt, addClass, rmClass } from "./dom_utils";
-import { off, on, signalDOMEvent } from "./events";
+import { activeElt, addClass, rmClass } from "./util/dom";
+import { off, on, signalDOMEvent } from "./util/event";
 import { hasCopyEvent } from "./feature_detection";
 import { isModifierKey, keyName, lookupKey } from "./keymap";
 import { signalLater } from "./operations";
 import { restartBlink } from "./selection_draw";
-import { ie, ie_version, mac, presto } from "./sniffs";
-import { Delayed, Pass } from "./utils";
-import { e_preventDefault, eventInWidget } from "./utils_events";
+import { ie, ie_version, mac, presto } from "./util/browser";
+import { Delayed, Pass } from "./util/misc";
+import { e_preventDefault } from "./util/event";
+import { eventInWidget } from "./utils_widgets";
 
 // Run a handler that was bound to a key.
 function doHandleBinding(cm, bound, dropShift) {

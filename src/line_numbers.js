@@ -1,4 +1,4 @@
-import { elt } from "./dom_utils";
+import { elt } from "./util/dom";
 import { compensateForHScroll } from "./position_measurement";
 import { updateGutterSpace } from "./update_display";
 import { lineNumberFor } from "./utils_line";

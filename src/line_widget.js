@@ -1,5 +1,5 @@
 import { changeLine } from "./changes";
-import { eventMixin } from "./events";
+import { eventMixin } from "./util/event";
 import { runInOp } from "./operations";
 import { addToScrollPos } from "./scrolling";
 import { heightAtLine, lineIsHidden } from "./spans";

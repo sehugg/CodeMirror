@@ -1,6 +1,6 @@
 import { replaceRange } from "./changes";
-import { contains, range, removeChildrenAndAdd, selectInput } from "./dom_utils";
-import { on, signalDOMEvent } from "./events";
+import { contains, range, removeChildrenAndAdd, selectInput } from "./util/dom";
+import { on, signalDOMEvent } from "./util/event";
 import { applyTextInput, copyableRanges, disableBrowserMagic, handlePaste, hiddenTextarea, lastCopied, setLastCopied } from "./input";
 import { operation, runInOp } from "./operations";
 import Pos from "./Pos";
@@ -9,9 +9,9 @@ import { findViewForLine, mapFromLineView, nodeAndOffsetInLineMap } from "./posi
 import { simpleSelection } from "./selection";
 import { prepareSelection } from "./selection_draw";
 import { setSelection } from "./selection_updates";
-import { gecko, ie_version } from "./sniffs";
-import { copyObj, Delayed, lst, nothing, sel_dontScroll } from "./utils";
-import { getBidiPartAt, getOrder } from "./utils_bidi";
+import { gecko, ie_version } from "./util/browser";
+import { copyObj, Delayed, lst, nothing, sel_dontScroll } from "./util/misc";
+import { getBidiPartAt, getOrder } from "./util/bidi";
 import { getBetween, getLine, lineNo } from "./utils_line";
 import { findViewIndex, regChange } from "./view_tracking";
 

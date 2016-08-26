@@ -1,5 +1,5 @@
 import { isWholeLineUpdate, linkedDocs, updateDoc } from "./document_data";
-import { hasHandler, signal, signalCursorActivity } from "./events";
+import { hasHandler, signal, signalCursorActivity } from "./util/event";
 import { startWorker } from "./highlight_worker";
 import { addChangeToHistory, historyChangeFromChange, mergeOldSpans, pushSelectionToHistory } from "./history";
 import { operation, signalLater } from "./operations";
@@ -10,7 +10,7 @@ import { sawReadOnlySpans } from "./saw_special_spans";
 import { normalizeSelection, Range, Selection } from "./selection";
 import { setSelection, setSelectionNoUndo } from "./selection_updates";
 import { lineLength, removeReadOnlyRanges, stretchSpansOverChange, visualLine } from "./spans";
-import { indexOf, lst, map, sel_dontScroll } from "./utils";
+import { indexOf, lst, map, sel_dontScroll } from "./util/misc";
 import { getBetween, getLine, lineNo } from "./utils_line";
 import { clipLine, clipPos } from "./utils_pos";
 import { regChange, regLineChange } from "./view_tracking";

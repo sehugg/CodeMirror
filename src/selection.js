@@ -1,5 +1,5 @@
 import { cmp, copyPos, maxPos, minPos } from "./Pos";
-import { indexOf } from "./utils";
+import { indexOf } from "./util/misc";
 
 // SELECTION / CURSOR
 

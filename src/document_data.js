@@ -6,7 +6,7 @@ import { loadMode } from "./state";
 import { getLine } from "./utils_line";
 import { regChange } from "./view_tracking";
 
-import { indexOf, lst } from "./utils";
+import { indexOf, lst } from "./util/misc";
 
 // DOCUMENT DATA STRUCTURE
 

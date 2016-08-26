@@ -1,6 +1,6 @@
 import { keyNames } from "./keynames";
-import { flipCtrlCmd, mac, presto } from "./sniffs";
-import { map } from "./utils";
+import { flipCtrlCmd, mac, presto } from "./util/browser";
+import { map } from "./util/misc";
 
 export var keyMap = {};
 

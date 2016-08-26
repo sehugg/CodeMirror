@@ -1,6 +1,6 @@
 import { linkedDocs } from "./document_data";
-import { elt } from "./dom_utils";
-import { eventMixin, hasHandler, on } from "./events";
+import { elt } from "./util/dom";
+import { eventMixin, hasHandler, on } from "./util/event";
 import { addChangeToHistory } from "./history";
 import { endOperation, operation, runInOp, signalLater, startOperation } from "./operations";
 import Pos from "./Pos";
@@ -9,7 +9,7 @@ import { clearLineMeasurementCacheFor, findViewForLine, textHeight } from "./pos
 import { seeReadOnlySpans, seeCollapsedSpans } from "./saw_special_spans";
 import { reCheckSelection } from "./selection_updates";
 import { addMarkedSpan, conflictingCollapsedRange, getMarkedSpanFor, lineIsHidden, lineLength, MarkedSpan, removeMarkedSpan, visualLine } from "./spans";
-import { copyObj, indexOf, lst } from "./utils";
+import { copyObj, indexOf, lst } from "./util/misc";
 import { lineNo, updateLineHeight } from "./utils_line";
 import { clipPos } from "./utils_pos";
 import { widgetHeight } from "./utils_widgets";

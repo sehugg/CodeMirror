@@ -1,16 +1,16 @@
-import { activeElt, removeChildren } from "./dom_utils";
-import { hasHandler, signal } from "./events";
+import { activeElt, removeChildren } from "./util/dom";
+import { hasHandler, signal } from "./util/event";
 import { startWorker } from "./highlight_worker";
 import { maybeUpdateLineNumberWidth } from "./line_numbers";
 import { displayHeight, displayWidth, getDimensions, paddingVert, scrollGap } from "./position_measurement";
 import { sawCollapsedSpans } from "./saw_special_spans";
 import { measureForScrollbars, updateScrollbars } from "./scrollbars";
 import { updateSelection } from "./selection_draw";
-import { mac, webkit } from "./sniffs";
+import { mac, webkit } from "./util/browser";
 import { heightAtLine, visualLineEndNo, visualLineNo } from "./spans";
 import { buildLineElement, updateLineForChanges } from "./update_line";
 import { updateHeightsInViewport, visibleLines } from "./update_lines";
-import { indexOf } from "./utils";
+import { indexOf } from "./util/misc";
 import { getLine, lineNumberFor } from "./utils_line";
 import { adjustView, countDirtyView, resetView } from "./view_tracking";
 

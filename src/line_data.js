@@ -1,12 +1,12 @@
-import { elt, joinClasses } from "./dom_utils";
-import { eventMixin, signal } from "./events";
+import { elt, joinClasses } from "./util/dom";
+import { eventMixin, signal } from "./util/event";
 import { hasBadBidiRects, zeroWidthElement } from "./feature_detection";
 import { getLineStyles } from "./highlight";
-import { ie, ie_version, webkit } from "./sniffs";
+import { ie, ie_version, webkit } from "./util/browser";
 import { attachMarkedSpans, compareCollapsedMarkers, detachMarkedSpans } from "./spans";
-import { spaceStr } from "./utils";
+import { spaceStr } from "./util/misc";
 import { lineNo, updateLineHeight } from "./utils_line";
-import { getOrder } from "./utils_bidi";
+import { getOrder } from "./util/bidi";
 
 // LINE DATA STRUCTURE
 

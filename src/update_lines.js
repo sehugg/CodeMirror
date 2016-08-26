@@ -1,5 +1,5 @@
 import { paddingTop, textHeight } from "./position_measurement";
-import { ie, ie_version } from "./sniffs";
+import { ie, ie_version } from "./util/browser";
 import { heightAtLine } from "./spans";
 import { getLine, lineAtHeight, updateLineHeight } from "./utils_line";
 

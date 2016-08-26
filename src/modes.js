@@ -1,4 +1,4 @@
-import { copyObj, createObj } from "./utils";
+import { copyObj, createObj } from "./util/misc";
 
 // Known modes, by name and by MIME
 export var modes = {}, mimeModes = {};

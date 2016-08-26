@@ -1,8 +1,8 @@
 import { startWorker } from "./highlight_worker";
 import { alignHorizontally } from "./line_numbers";
-import { chrome, gecko, ie, mac, presto, safari, webkit } from "./sniffs";
+import { chrome, gecko, ie, mac, presto, safari, webkit } from "./util/browser";
 import { updateDisplaySimple} from "./update_display";
-import { e_preventDefault } from "./utils_events";
+import { e_preventDefault } from "./util/event";
 
 // SCROLL EVENTS
 

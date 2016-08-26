@@ -6,7 +6,7 @@ import { cmp } from "./Pos";
 import { ensureCursorVisible } from "./scrolling";
 import { Range } from "./selection";
 import { replaceOneSelection } from "./selection_updates";
-import { countColumn, lst, Pass, spaceStr } from "./utils";
+import { countColumn, lst, Pass, spaceStr } from "./util/misc";
 import { getLine } from "./utils_line";
 
 // Indent the given line. The how parameter can be "smart",

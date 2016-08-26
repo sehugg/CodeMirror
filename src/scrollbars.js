@@ -1,9 +1,9 @@
-import { elt } from "./dom_utils";
-import { on } from "./events";
+import { elt } from "./util/dom";
+import { on } from "./util/event";
 import { scrollGap, paddingVert } from "./position_measurement";
-import { ie, ie_version, mac, mac_geMountainLion } from "./sniffs";
+import { ie, ie_version, mac, mac_geMountainLion } from "./util/browser";
 import { updateHeightsInViewport } from "./update_lines";
-import { copyObj, Delayed } from "./utils";
+import { copyObj, Delayed } from "./util/misc";
 
 // SCROLLBARS
 

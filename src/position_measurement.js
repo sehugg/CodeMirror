@@ -1,13 +1,13 @@
-import { elt, removeChildren, range, removeChildrenAndAdd } from "./dom_utils";
+import { elt, removeChildren, range, removeChildrenAndAdd } from "./util/dom";
 import { hasBadZoomedRects } from "./feature_detection";
 import { buildLineContent } from "./line_data";
 import Pos from "./Pos";
 import { collapsedSpanAtEnd, heightAtLine, lineIsHidden, visualLine } from "./spans";
-import { ie, ie_version } from "./sniffs";
+import { ie, ie_version } from "./util/browser";
 import { updateLineForChanges } from "./update_line";
-import { countColumn, isExtendingChar, scrollerGap } from "./utils";
-import { bidiLeft, bidiRight, bidiOther, getBidiPartAt, getOrder, lineLeft, lineRight, moveVisually } from "./utils_bidi";
-import { e_target } from "./utils_events";
+import { countColumn, isExtendingChar, scrollerGap } from "./util/misc";
+import { bidiLeft, bidiRight, bidiOther, getBidiPartAt, getOrder, lineLeft, lineRight, moveVisually } from "./util/bidi";
+import { e_target } from "./util/event";
 import { getLine, lineAtHeight, lineNo, updateLineHeight } from "./utils_line";
 import { clipPos } from "./utils_pos";
 import { widgetHeight } from "./utils_widgets";

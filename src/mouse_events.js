@@ -1,5 +1,5 @@
-import { activeElt } from "./dom_utils";
-import { hasHandler, off, on, signal, signalDOMEvent } from "./events";
+import { activeElt } from "./util/dom";
+import { hasHandler, off, on, signal, signalDOMEvent } from "./util/event";
 import { dragAndDrop } from "./feature_detection";
 import { delayBlurEvent, ensureFocus } from "./focus";
 import { operation } from "./operations";
@@ -8,12 +8,13 @@ import { cmp, maxPos, minPos } from "./Pos";
 import { posFromMouse } from "./position_measurement";
 import { normalizeSelection, Range } from "./selection";
 import { extendRange, extendSelection, replaceOneSelection, setSelection } from "./selection_updates";
-import { captureRightClick, chromeOS, ie, ie_version, mac, webkit } from "./sniffs";
+import { captureRightClick, chromeOS, ie, ie_version, mac, webkit } from "./util/browser";
 import { visibleLines } from "./update_lines";
-import { bind, countColumn, findColumn, sel_mouse } from "./utils";
-import { e_button, e_defaultPrevented, e_preventDefault, e_target, eventInWidget } from "./utils_events";
+import { bind, countColumn, findColumn, sel_mouse } from "./util/misc";
+import { e_button, e_defaultPrevented, e_preventDefault, e_target } from "./util/event";
 import { getLine, lineAtHeight } from "./utils_line";
 import { clipPos } from "./utils_pos";
+import { eventInWidget } from "./utils_widgets";
 
 // A mouse down can be a single click, double click, triple click,
 // start of selection drag, start of text drag, new cursor

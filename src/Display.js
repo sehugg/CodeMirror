@@ -1,6 +1,6 @@
-import { elt } from "./dom_utils";
-import { gecko, ie, ie_version, mobile, webkit } from "./sniffs";
-import { scrollerGap } from "./utils";
+import { elt } from "./util/dom";
+import { gecko, ie, ie_version, mobile, webkit } from "./util/browser";
+import { scrollerGap } from "./util/misc";
 
 // The display handles the DOM integration, both for input reading
 // and content drawing. It holds references to DOM nodes and

@@ -1,4 +1,4 @@
-import { ie, ie_version, ios } from "./sniffs";
+import { ie, ie_version, ios } from "./browser";
 
 export function classTest(cls) { return new RegExp("(^|\\s)" + cls + "(?:$|\\s)\\s*"); }
 
