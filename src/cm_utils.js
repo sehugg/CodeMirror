@@ -4,6 +4,7 @@ import { clearCaches } from "./position_measurement";
 import { setScrollLeft, setScrollTop } from "./scroll_events";
 import { scrollbarModel } from "./scrollbars";
 import { updateGutterSpace } from "./update_display";
+import { indexOf } from "./utils";
 
 export function initScrollbars(cm) {
   if (cm.display.scrollbars) {
@@ -48,4 +49,16 @@ export function updateGutters(cm) {
   }
   gutters.style.display = i ? "" : "none";
   updateGutterSpace(cm);
+}
+
+// Make sure the gutters options contains the element
+// "CodeMirror-linenumbers" when the lineNumbers option is true.
+export function setGuttersForLineNumbers(options) {
+  var found = indexOf(options.gutters, "CodeMirror-linenumbers");
+  if (found == -1 && options.lineNumbers) {
+    options.gutters = options.gutters.concat(["CodeMirror-linenumbers"]);
+  } else if (found > -1 && !options.lineNumbers) {
+    options.gutters = options.gutters.slice(0);
+    options.gutters.splice(found, 1);
+  }
 }

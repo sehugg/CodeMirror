@@ -1,7 +1,7 @@
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
 // Distributed under an MIT license: http://codemirror.net/LICENSE
 
-import { initScrollbars, themeChanged, updateGutters } from "./cm_utils";
+import { initScrollbars, setGuttersForLineNumbers, themeChanged, updateGutters } from "./cm_utils";
 import { Init } from "./default_options";
 import { attachDoc } from "./document_data";
 import { clearDragCursor, onDragOver, onDragStart, onDrop } from "./drop_events";
@@ -18,7 +18,7 @@ import { onScrollWheel, setScrollLeft, setScrollTop } from "./scroll_events";
 import { Range } from "./selection";
 import { extendSelection } from "./selection_updates";
 import { captureRightClick, ie, ie_version, mobile, webkit } from "./sniffs";
-import { bind, copyObj, Delayed, setGuttersForLineNumbers } from "./utils";
+import { bind, copyObj, Delayed } from "./utils";
 import { e_preventDefault, e_stop, eventInWidget } from "./utils_events";
 import { clipPos } from "./utils_pos";
 import Display from "./Display";

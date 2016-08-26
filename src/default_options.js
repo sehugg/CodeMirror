@@ -1,5 +1,5 @@
 import { replaceRange } from "./changes";
-import { initScrollbars, themeChanged, updateGutters } from "./cm_utils";
+import { initScrollbars, setGuttersForLineNumbers, themeChanged, updateGutters } from "./cm_utils";
 import { addClass, rmClass } from "./dom_utils";
 import { off, on } from "./events";
 import { onBlur } from "./focus";
@@ -13,7 +13,6 @@ import { updateSelection } from "./selection_draw";
 import { mobile, windows } from "./sniffs";
 import { findMaxLine } from "./spans";
 import { loadMode, resetModeState } from "./state";
-import { setGuttersForLineNumbers } from "./utils";
 import { regChange } from "./view_tracking";
 
 export var Init = {toString: function(){return "CodeMirror.Init";}};
