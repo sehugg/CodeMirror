@@ -1,13 +1,11 @@
-// BROWSER SNIFFING
-
 // Kludges for bugs and behavior differences that can't be feature
 // detected are enabled based on userAgent etc sniffing.
-export var userAgent = navigator.userAgent;
-export var platform = navigator.platform;
+var userAgent = navigator.userAgent;
+var platform = navigator.platform;
 
 export var gecko = /gecko\/\d/i.test(userAgent);
-export var ie_upto10 = /MSIE \d/.test(userAgent);
-export var ie_11up = /Trident\/(?:[7-9]|\d{2,})\..*rv:(\d+)/.exec(userAgent);
+var ie_upto10 = /MSIE \d/.test(userAgent);
+var ie_11up = /Trident\/(?:[7-9]|\d{2,})\..*rv:(\d+)/.exec(userAgent);
 export var ie = ie_upto10 || ie_11up;
 export var ie_version = ie && (ie_upto10 ? document.documentMode || 6 : ie_11up[1]);
 export var webkit = /WebKit\//.test(userAgent);
@@ -25,7 +23,7 @@ export var mac = ios || /Mac/.test(platform);
 export var chromeOS = /\bCrOS\b/.test(userAgent);
 export var windows = /win/i.test(platform);
 
-export var presto_version = presto && userAgent.match(/Version\/(\d*\.\d*)/);
+var presto_version = presto && userAgent.match(/Version\/(\d*\.\d*)/);
 if (presto_version) presto_version = Number(presto_version[1]);
 if (presto_version && presto_version >= 15) { presto = false; webkit = true; }
 // Some browsers use the wrong event properties to signal cmd/ctrl on OS X
