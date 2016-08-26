@@ -1,5 +1,5 @@
 import { replaceRange } from "./changes";
-import { getStateBefore } from "./highlight";
+import { getStateBefore } from "./line/highlight";
 import { runInOp } from "./operations";
 import Pos from "./Pos";
 import { cmp } from "./Pos";

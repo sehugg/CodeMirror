@@ -1,17 +1,17 @@
-import { elt, removeChildren, range, removeChildrenAndAdd } from "./util/dom";
-import { hasBadZoomedRects } from "./feature_detection";
-import { buildLineContent } from "./line_data";
-import Pos from "./Pos";
-import { collapsedSpanAtEnd, heightAtLine, lineIsHidden, visualLine } from "./spans";
-import { ie, ie_version } from "./util/browser";
+import { elt, removeChildren, range, removeChildrenAndAdd } from "../util/dom";
+import { hasBadZoomedRects } from "../feature_detection";
+import { buildLineContent } from "../line/line_data";
+import Pos from "../Pos";
+import { collapsedSpanAtEnd, heightAtLine, lineIsHidden, visualLine } from "../line/spans";
+import { ie, ie_version } from "../util/browser";
 import { updateLineForChanges } from "./update_line";
-import { countColumn, isExtendingChar, scrollerGap } from "./util/misc";
-import { bidiLeft, bidiRight, bidiOther, getBidiPartAt, getOrder, lineLeft, lineRight, moveVisually } from "./util/bidi";
-import { e_target } from "./util/event";
-import { getLine, lineAtHeight, lineNo, updateLineHeight } from "./utils_line";
-import { clipPos } from "./utils_pos";
-import { widgetHeight } from "./utils_widgets";
-import { findViewIndex, LineView } from "./view_tracking";
+import { countColumn, isExtendingChar, scrollerGap } from "../util/misc";
+import { bidiLeft, bidiRight, bidiOther, getBidiPartAt, getOrder, lineLeft, lineRight, moveVisually } from "../util/bidi";
+import { e_target } from "../util/event";
+import { getLine, lineAtHeight, lineNo, updateLineHeight } from "../utils_line";
+import { clipPos } from "../utils_pos";
+import { widgetHeight } from "../utils_widgets";
+import { LineView } from "../line/line_data";
 
 // POSITION MEASUREMENT
 
@@ -284,7 +284,7 @@ function pageScrollY() { return window.pageYOffset || (document.documentElement 
 
 // Converts a {top, bottom, left, right} box from line-local
 // coordinates into another coordinate system. Context may be one of
-// "line", "div" (display.lineDiv), "local"/null (editor), "window",
+// "line", "div" (display.lineDiv), "local"./null (editor), "window",
 // or "page".
 export function intoCoordSystem(cm, lineObj, rect, context) {
   if (lineObj.widgets) for (var i = 0; i < lineObj.widgets.length; ++i) if (lineObj.widgets[i].above) {
@@ -307,7 +307,7 @@ export function intoCoordSystem(cm, lineObj, rect, context) {
 }
 
 // Coverts a box from "div" coords to another coordinate system.
-// Context may be "window", "page", "div", or "local"/null.
+// Context may be "window", "page", "div", or "local"./null.
 export function fromCoordSystem(cm, coords, context) {
   if (context == "div") return coords;
   var left = coords.left, top = coords.top;
@@ -565,4 +565,17 @@ export function posFromMouse(cm, e, liberal, forRect) {
     coords = Pos(coords.line, Math.max(0, Math.round((x - paddingH(cm.display).left) / charWidth(cm.display)) - colDiff));
   }
   return coords;
+}
+
+// Find the view element corresponding to a given line. Return null
+// when the line isn't visible.
+export function findViewIndex(cm, n) {
+  if (n >= cm.display.viewTo) return null;
+  n -= cm.display.viewFrom;
+  if (n < 0) return null;
+  var view = cm.display.view;
+  for (var i = 0; i < view.length; i++) {
+    n -= view[i].size;
+    if (n < 0) return i;
+  }
 }

@@ -48,7 +48,7 @@ import { signal } from "./util/event";
 
 CodeMirror.signal = signal;
 
-import { Line } from "./line_data";
+import { Line } from "./line/line_data";
 
 CodeMirror.Line = Line;
 
@@ -58,7 +58,7 @@ CodeMirror.changeEnd = changeEnd;
 
 // SCROLLBARS
 
-import { scrollbarModel } from "./scrollbars";
+import { scrollbarModel } from "./display/scrollbars";
 
 CodeMirror.scrollbarModel = scrollbarModel;
 

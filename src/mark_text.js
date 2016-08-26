@@ -5,15 +5,15 @@ import { addChangeToHistory } from "./history";
 import { endOperation, operation, runInOp, signalLater, startOperation } from "./operations";
 import Pos from "./Pos";
 import { cmp } from "./Pos";
-import { clearLineMeasurementCacheFor, findViewForLine, textHeight } from "./position_measurement";
-import { seeReadOnlySpans, seeCollapsedSpans } from "./saw_special_spans";
+import { clearLineMeasurementCacheFor, findViewForLine, textHeight } from "./measurement/position_measurement";
+import { seeReadOnlySpans, seeCollapsedSpans } from "./line/saw_special_spans";
 import { reCheckSelection } from "./selection_updates";
-import { addMarkedSpan, conflictingCollapsedRange, getMarkedSpanFor, lineIsHidden, lineLength, MarkedSpan, removeMarkedSpan, visualLine } from "./spans";
+import { addMarkedSpan, conflictingCollapsedRange, getMarkedSpanFor, lineIsHidden, lineLength, MarkedSpan, removeMarkedSpan, visualLine } from "./line/spans";
 import { copyObj, indexOf, lst } from "./util/misc";
 import { lineNo, updateLineHeight } from "./utils_line";
 import { clipPos } from "./utils_pos";
 import { widgetHeight } from "./utils_widgets";
-import { regChange, regLineChange } from "./view_tracking";
+import { regChange, regLineChange } from "./display/view_tracking";
 
 // TEXTMARKERS
 

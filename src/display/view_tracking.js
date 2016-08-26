@@ -1,34 +1,8 @@
-import { sawCollapsedSpans } from "./saw_special_spans";
-import { lineIsHidden, visualLineContinued, visualLineEndNo, visualLineNo } from "./spans";
-import { indexOf, lst } from "./util/misc";
-import { getLine, lineNo } from "./utils_line";
-
-// VIEW TRACKING
-
-// These objects are used to represent the visible (currently drawn)
-// part of the document. A LineView may correspond to multiple
-// logical lines, if those are connected by collapsed ranges.
-export function LineView(doc, line, lineN) {
-  // The starting line
-  this.line = line;
-  // Continuing lines, if any
-  this.rest = visualLineContinued(line);
-  // Number of logical lines in this visual line
-  this.size = this.rest ? lineNo(lst(this.rest)) - lineN + 1 : 1;
-  this.node = this.text = null;
-  this.hidden = lineIsHidden(doc, line);
-}
-
-// Create a range of LineView objects for the given lines.
-function buildViewArray(cm, from, to) {
-  var array = [], nextPos;
-  for (var pos = from; pos < to; pos = nextPos) {
-    var view = new LineView(cm.doc, getLine(cm.doc, pos), pos);
-    nextPos = pos + view.size;
-    array.push(view);
-  }
-  return array;
-}
+import { buildViewArray } from "../line/line_data";
+import { sawCollapsedSpans } from "../line/saw_special_spans";
+import { visualLineEndNo, visualLineNo } from "../line/spans";
+import { findViewIndex } from "../measurement/position_measurement";
+import { indexOf } from "../util/misc";
 
 // Updates the display.view data structure for a given change to the
 // document. From and to are in pre-change coordinates. Lendiff is
@@ -119,19 +93,6 @@ export function resetView(cm) {
   cm.display.viewFrom = cm.display.viewTo = cm.doc.first;
   cm.display.view = [];
   cm.display.viewOffset = 0;
-}
-
-// Find the view element corresponding to a given line. Return null
-// when the line isn't visible.
-export function findViewIndex(cm, n) {
-  if (n >= cm.display.viewTo) return null;
-  n -= cm.display.viewFrom;
-  if (n < 0) return null;
-  var view = cm.display.view;
-  for (var i = 0; i < view.length; i++) {
-    n -= view[i].size;
-    if (n < 0) return i;
-  }
 }
 
 function viewCuttingPoint(cm, oldN, newN, dir) {

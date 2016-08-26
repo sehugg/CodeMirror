@@ -1,5 +1,5 @@
 import { on } from "./util/event";
-import { onBlur } from "./focus";
+import { onBlur } from "./display/focus";
 
 // These must be handled carefully, because naively registering a
 // handler for each editor will cause the editors to never be

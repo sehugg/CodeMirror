@@ -1,7 +1,7 @@
-import { startWorker } from "./highlight_worker";
-import { alignHorizontally } from "./line_numbers";
+import { startWorker } from "./display/highlight_worker";
+import { alignHorizontally } from "./display/line_numbers";
+import { updateDisplaySimple} from "./display/update_display";
 import { chrome, gecko, ie, mac, presto, safari, webkit } from "./util/browser";
-import { updateDisplaySimple} from "./update_display";
 import { e_preventDefault } from "./util/event";
 
 // SCROLL EVENTS

@@ -2,7 +2,7 @@ import { changeEnd } from "./changes";
 import { linkedDocs } from "./document_data";
 import { signal } from "./util/event";
 import { cmp, copyPos } from "./Pos";
-import { stretchSpansOverChange } from "./spans";
+import { stretchSpansOverChange } from "./line/spans";
 import { lst } from "./util/misc";
 import { getBetween } from "./utils_line";
 

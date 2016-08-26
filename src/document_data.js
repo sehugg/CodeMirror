@@ -1,12 +1,11 @@
-import { cleanUpLine, Line, updateLine } from "./line_data";
+import { cleanUpLine, Line, updateLine } from "./line/line_data";
+import { findMaxLine } from "./line/spans";
 import { signalLater } from "./operations";
-import { estimateLineHeights } from "./position_measurement";
-import { findMaxLine } from "./spans";
+import { estimateLineHeights } from "./measurement/position_measurement";
 import { loadMode } from "./state";
 import { getLine } from "./utils_line";
-import { regChange } from "./view_tracking";
-
 import { indexOf, lst } from "./util/misc";
+import { regChange } from "./display/view_tracking";
 
 // DOCUMENT DATA STRUCTURE
 

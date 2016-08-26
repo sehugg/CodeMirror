@@ -4,24 +4,24 @@ import { commands } from "./commands";
 import { attachDoc } from "./document_data";
 import { activeElt, addClass, rmClass } from "./util/dom";
 import { eventMixin, signal } from "./util/event";
-import { getLineStyles, getStateBefore, takeToken } from "./highlight";
+import { getLineStyles, getStateBefore, takeToken } from "./line/highlight";
 import { triggerElectric } from "./input";
 import { onKeyDown, onKeyPress, onKeyUp } from "./key_events";
 import { getKeyMap } from "./keymap";
 import { methodOp, operation, runInOp, signalLater } from "./operations";
 import Pos from "./Pos";
 import { cmp } from "./Pos";
-import { charCoords, charWidth, clearCaches, clearLineMeasurementCache, coordsChar, cursorCoords, displayHeight, displayWidth, estimateLineHeights, fromCoordSystem, intoCoordSystem, scrollGap, textHeight } from "./position_measurement";
+import { charCoords, charWidth, clearCaches, clearLineMeasurementCache, coordsChar, cursorCoords, displayHeight, displayWidth, estimateLineHeights, fromCoordSystem, intoCoordSystem, scrollGap, textHeight } from "./measurement/position_measurement";
 import { Range } from "./selection";
 import { replaceOneSelection, skipAtomic } from "./selection_updates";
 import { addToScrollPos, calculateScrollPos, ensureCursorVisible, resolveScrollToPos, scrollIntoView } from "./scrolling";
-import { heightAtLine } from "./spans";
-import { updateGutterSpace } from "./update_display";
+import { heightAtLine } from "./line/spans";
+import { updateGutterSpace } from "./display/update_display";
 import { indexOf, insertSorted, isEmpty, isWordChar, sel_dontScroll, sel_move } from "./util/misc";
 import { lineLeft, lineRight, moveLogically, moveVisually } from "./util/bidi";
 import { getLine, isLine, lineAtHeight, lineNo } from "./utils_line";
 import { clipLine, clipPos } from "./utils_pos";
-import { regChange, regLineChange } from "./view_tracking";
+import { regChange, regLineChange } from "./display/view_tracking";
 
 // The publicly visible API. Note that methodOp(f) means
 // 'wrap f in an operation, performed on its `this` parameter'.

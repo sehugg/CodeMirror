@@ -1,19 +1,19 @@
 import { isWholeLineUpdate, linkedDocs, updateDoc } from "./document_data";
 import { hasHandler, signal, signalCursorActivity } from "./util/event";
-import { startWorker } from "./highlight_worker";
+import { startWorker } from "./display/highlight_worker";
 import { addChangeToHistory, historyChangeFromChange, mergeOldSpans, pushSelectionToHistory } from "./history";
 import { operation, signalLater } from "./operations";
 import Pos from "./Pos";
 import { cmp } from "./Pos";
-import { estimateHeight } from "./position_measurement";
-import { sawReadOnlySpans } from "./saw_special_spans";
+import { estimateHeight } from "./measurement/position_measurement";
+import { sawReadOnlySpans } from "./line/saw_special_spans";
 import { normalizeSelection, Range, Selection } from "./selection";
 import { setSelection, setSelectionNoUndo } from "./selection_updates";
-import { lineLength, removeReadOnlyRanges, stretchSpansOverChange, visualLine } from "./spans";
+import { lineLength, removeReadOnlyRanges, stretchSpansOverChange, visualLine } from "./line/spans";
 import { indexOf, lst, map, sel_dontScroll } from "./util/misc";
 import { getBetween, getLine, lineNo } from "./utils_line";
 import { clipLine, clipPos } from "./utils_pos";
-import { regChange, regLineChange } from "./view_tracking";
+import { regChange, regLineChange } from "./display/view_tracking";
 
 // UPDATING
 

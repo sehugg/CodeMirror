@@ -4,7 +4,7 @@ import { off, on, signalDOMEvent } from "./util/event";
 import { hasCopyEvent } from "./feature_detection";
 import { isModifierKey, keyName, lookupKey } from "./keymap";
 import { signalLater } from "./operations";
-import { restartBlink } from "./selection_draw";
+import { restartBlink } from "./display/selection_draw";
 import { ie, ie_version, mac, presto } from "./util/browser";
 import { Delayed, Pass } from "./util/misc";
 import { e_preventDefault } from "./util/event";

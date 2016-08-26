@@ -2,18 +2,18 @@ import { replaceRange } from "./changes";
 import { initScrollbars, setGuttersForLineNumbers, themeChanged, updateGutters } from "./cm_utils";
 import { addClass, rmClass } from "./util/dom";
 import { off, on } from "./util/event";
-import { onBlur } from "./focus";
+import { onBlur } from "./display/focus";
 import { getKeyMap } from "./keymap";
-import { defaultSpecialCharPlaceholder } from "./line_data";
-import { alignHorizontally } from "./line_numbers";
+import { defaultSpecialCharPlaceholder } from "./line/line_data";
+import { alignHorizontally } from "./display/line_numbers";
 import Pos from "./Pos";
-import { clearCaches, compensateForHScroll, estimateLineHeights } from "./position_measurement";
-import { updateScrollbars } from "./scrollbars";
-import { updateSelection } from "./selection_draw";
+import { clearCaches, compensateForHScroll, estimateLineHeights } from "./measurement/position_measurement";
+import { updateScrollbars } from "./display/scrollbars";
+import { updateSelection } from "./display/selection_draw";
 import { mobile, windows } from "./util/browser";
-import { findMaxLine } from "./spans";
+import { findMaxLine } from "./line/spans";
 import { loadMode, resetModeState } from "./state";
-import { regChange } from "./view_tracking";
+import { regChange } from "./display/view_tracking";
 
 export var Init = {toString: function(){return "CodeMirror.Init";}};
 

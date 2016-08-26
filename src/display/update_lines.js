@@ -1,7 +1,7 @@
-import { paddingTop, textHeight } from "./position_measurement";
-import { ie, ie_version } from "./util/browser";
-import { heightAtLine } from "./spans";
-import { getLine, lineAtHeight, updateLineHeight } from "./utils_line";
+import { paddingTop, textHeight } from "../measurement/position_measurement";
+import { ie, ie_version } from "../util/browser";
+import { heightAtLine } from "../line/spans";
+import { getLine, lineAtHeight, updateLineHeight } from "../utils_line";
 
 // Read the actual heights of the rendered lines, and update their
 // stored heights to match.

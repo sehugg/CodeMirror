@@ -4,7 +4,7 @@ import Pos from "./Pos";
 import { ensureCursorVisible } from "./scrolling";
 import { Range } from "./selection";
 import { selectAll } from "./selection_updates";
-import { collapsedSpanAtEnd, visualLine } from "./spans";
+import { collapsedSpanAtEnd, visualLine } from "./line/spans";
 import { countColumn, sel_dontScroll, sel_move, spaceStr } from "./util/misc";
 import { getOrder, lineLeft, lineRight } from "./util/bidi";
 import { getLine, lineNo } from "./utils_line";

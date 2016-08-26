@@ -1,16 +1,16 @@
 import { signal } from "./util/event";
 import { activeElt } from "./util/dom";
-import { ensureFocus } from "./focus";
-import { alignHorizontally } from "./line_numbers";
+import { ensureFocus } from "./display/focus";
+import { alignHorizontally } from "./display/line_numbers";
 import { finishOperation, pushOperation } from "./operation_group";
-import { displayWidth, measureChar, scrollGap } from "./position_measurement";
-import { measureForScrollbars, updateScrollbars } from "./scrollbars";
+import { displayWidth, measureChar, scrollGap } from "./measurement/position_measurement";
+import { measureForScrollbars, updateScrollbars } from "./display/scrollbars";
 import { setScrollLeft } from "./scroll_events";
-import { restartBlink } from "./selection_draw";
+import { restartBlink } from "./display/selection_draw";
 import { maybeScrollWindow, scrollPosIntoView } from "./scrolling";
-import { findMaxLine } from "./spans";
-import { DisplayUpdate, maybeClipScrollbars, postUpdateDisplay, setDocumentHeight, updateDisplayIfNeeded } from "./update_display";
-import { updateHeightsInViewport } from "./update_lines";
+import { findMaxLine } from "./line/spans";
+import { DisplayUpdate, maybeClipScrollbars, postUpdateDisplay, setDocumentHeight, updateDisplayIfNeeded } from "./display/update_display";
+import { updateHeightsInViewport } from "./display/update_lines";
 import { clipPos } from "./utils_pos";
 
 // OPERATIONS

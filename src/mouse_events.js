@@ -1,15 +1,15 @@
 import { activeElt } from "./util/dom";
 import { hasHandler, off, on, signal, signalDOMEvent } from "./util/event";
 import { dragAndDrop } from "./feature_detection";
-import { delayBlurEvent, ensureFocus } from "./focus";
+import { delayBlurEvent, ensureFocus } from "./display/focus";
 import { operation } from "./operations";
 import Pos from "./Pos";
 import { cmp, maxPos, minPos } from "./Pos";
-import { posFromMouse } from "./position_measurement";
+import { posFromMouse } from "./measurement/position_measurement";
 import { normalizeSelection, Range } from "./selection";
 import { extendRange, extendSelection, replaceOneSelection, setSelection } from "./selection_updates";
 import { captureRightClick, chromeOS, ie, ie_version, mac, webkit } from "./util/browser";
-import { visibleLines } from "./update_lines";
+import { visibleLines } from "./display/update_lines";
 import { bind, countColumn, findColumn, sel_mouse } from "./util/misc";
 import { e_button, e_defaultPrevented, e_preventDefault, e_target } from "./util/event";
 import { getLine, lineAtHeight } from "./utils_line";

@@ -1,9 +1,9 @@
 import { addClass, elt, removeChildren, rmClass } from "./util/dom";
 import { on } from "./util/event";
-import { clearCaches } from "./position_measurement";
+import { clearCaches } from "./measurement/position_measurement";
 import { setScrollLeft, setScrollTop } from "./scroll_events";
-import { scrollbarModel } from "./scrollbars";
-import { updateGutterSpace } from "./update_display";
+import { scrollbarModel } from "./display/scrollbars";
+import { updateGutterSpace } from "./display/update_display";
 import { indexOf } from "./util/misc";
 
 export function initScrollbars(cm) {

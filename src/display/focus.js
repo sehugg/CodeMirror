@@ -1,7 +1,7 @@
-import { addClass, rmClass } from "./util/dom";
-import { signal } from "./util/event";
 import { restartBlink } from "./selection_draw";
-import { webkit } from "./util/browser";
+import { webkit } from "../util/browser";
+import { addClass, rmClass } from "../util/dom";
+import { signal } from "../util/event";
 
 export function ensureFocus(cm) {
   if (!cm.state.focused) { cm.display.input.focus(); onFocus(cm); }

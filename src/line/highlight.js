@@ -1,8 +1,8 @@
-import { copyState, innerMode, startState } from "./modes";
-import StringStream from "./StringStream";
-import { countColumn } from "./util/misc";
-import { getLine, lineNo } from "./utils_line";
-import { clipPos } from "./utils_pos";
+import { copyState, innerMode, startState } from "../modes";
+import StringStream from "../StringStream";
+import { countColumn } from "../util/misc";
+import { getLine, lineNo } from "../utils_line";
+import { clipPos } from "../utils_pos";
 
 // Compute a style array (an array starting with a mode generation
 // -- for invalidation -- followed by pairs of end positions and

@@ -5,15 +5,15 @@ import { applyTextInput, copyableRanges, disableBrowserMagic, handlePaste, hidde
 import { operation, runInOp } from "./operations";
 import Pos from "./Pos";
 import { cmp, maxPos, minPos } from "./Pos";
-import { findViewForLine, mapFromLineView, nodeAndOffsetInLineMap } from "./position_measurement";
+import { findViewIndex, findViewForLine, mapFromLineView, nodeAndOffsetInLineMap } from "./measurement/position_measurement";
 import { simpleSelection } from "./selection";
-import { prepareSelection } from "./selection_draw";
+import { prepareSelection } from "./display/selection_draw";
 import { setSelection } from "./selection_updates";
 import { gecko, ie_version } from "./util/browser";
 import { copyObj, Delayed, lst, nothing, sel_dontScroll } from "./util/misc";
 import { getBidiPartAt, getOrder } from "./util/bidi";
 import { getBetween, getLine, lineNo } from "./utils_line";
-import { findViewIndex, regChange } from "./view_tracking";
+import { regChange } from "./display/view_tracking";
 
 // CONTENTEDITABLE INPUT STYLE
 

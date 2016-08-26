@@ -1,12 +1,12 @@
-import { elt, joinClasses } from "./util/dom";
-import { eventMixin, signal } from "./util/event";
-import { hasBadBidiRects, zeroWidthElement } from "./feature_detection";
+import { elt, joinClasses } from "../util/dom";
+import { eventMixin, signal } from "../util/event";
+import { hasBadBidiRects, zeroWidthElement } from "../feature_detection";
 import { getLineStyles } from "./highlight";
-import { ie, ie_version, webkit } from "./util/browser";
-import { attachMarkedSpans, compareCollapsedMarkers, detachMarkedSpans } from "./spans";
-import { spaceStr } from "./util/misc";
-import { lineNo, updateLineHeight } from "./utils_line";
-import { getOrder } from "./util/bidi";
+import { ie, ie_version, webkit } from "../util/browser";
+import { attachMarkedSpans, compareCollapsedMarkers, detachMarkedSpans, lineIsHidden, visualLineContinued } from "./spans";
+import { getOrder } from "../util/bidi";
+import { getLine, lineNo, updateLineHeight } from "../utils_line";
+import { lst, spaceStr } from "../util/misc";
 
 // LINE DATA STRUCTURE
 
@@ -302,3 +302,28 @@ function insertLineContent(line, builder, styles) {
   }
 }
 
+
+// These objects are used to represent the visible (currently drawn)
+// part of the document. A LineView may correspond to multiple
+// logical lines, if those are connected by collapsed ranges.
+export function LineView(doc, line, lineN) {
+  // The starting line
+  this.line = line;
+  // Continuing lines, if any
+  this.rest = visualLineContinued(line);
+  // Number of logical lines in this visual line
+  this.size = this.rest ? lineNo(lst(this.rest)) - lineN + 1 : 1;
+  this.node = this.text = null;
+  this.hidden = lineIsHidden(doc, line);
+}
+
+// Create a range of LineView objects for the given lines.
+export function buildViewArray(cm, from, to) {
+  var array = [], nextPos;
+  for (var pos = from; pos < to; pos = nextPos) {
+    var view = new LineView(cm.doc, getLine(cm.doc, pos), pos);
+    nextPos = pos + view.size;
+    array.push(view);
+  }
+  return array;
+}

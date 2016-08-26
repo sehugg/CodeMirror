@@ -11,12 +11,12 @@ import Pos from "./Pos";
 import { cmp } from "./Pos";
 import { ensureCursorVisible } from "./scrolling";
 import { Range } from "./selection";
-import { visualLine } from "./spans";
+import { visualLine } from "./line/spans";
 import { createObj, indexOf, lst } from "./util/misc";
 import { getBetween, getLine, getLines, isLine, lineNo } from "./utils_line";
 import { clipPos, clipPosArray } from "./utils_pos";
 
-import { Line } from "./line_data";
+import { Line } from "./line/line_data";
 import { normalizeSelection, Selection } from "./selection";
 import { simpleSelection } from "./selection";
 import { extendSelection, extendSelections, setSelection, setSelectionReplaceHistory, setSimpleSelection } from "./selection_updates";

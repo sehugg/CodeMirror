@@ -1,7 +1,7 @@
-import { cmp } from "./Pos";
+import { cmp } from "../Pos";
 import { sawCollapsedSpans } from "./saw_special_spans";
-import { indexOf, lst } from "./util/misc";
-import { getLine, isLine, lineNo } from "./utils_line";
+import { indexOf, lst } from "../util/misc";
+import { getLine, isLine, lineNo } from "../utils_line";
 
 // TEXTMARKER SPANS
 

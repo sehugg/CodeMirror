@@ -1,6 +1,6 @@
-import { startWorker } from "./highlight_worker";
+import { startWorker } from "./display/highlight_worker";
+import { regChange } from "./display/view_tracking";
 import { getMode } from "./modes";
-import { regChange } from "./view_tracking";
 
 // Used to get the editor into a consistent state again when options change.
 

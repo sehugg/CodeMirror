@@ -1,9 +1,9 @@
-import { elt } from "./util/dom";
-import Pos from "./Pos";
-import { charCoords, cursorCoords, displayWidth, paddingH } from "./position_measurement";
-import { visualLine } from "./spans";
-import { getOrder, iterateBidiSections } from "./util/bidi";
-import { getLine } from "./utils_line";
+import Pos from "../Pos";
+import { charCoords, cursorCoords, displayWidth, paddingH } from "../measurement/position_measurement";
+import { visualLine } from "../line/spans";
+import { getOrder, iterateBidiSections } from "../util/bidi";
+import { elt } from "../util/dom";
+import { getLine } from "../utils_line";
 
 // SELECTION DRAWING
 
