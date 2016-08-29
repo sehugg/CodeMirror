@@ -1,25 +1,25 @@
 import CodeMirror from "./CodeMirror";
-import { changeLine, computeReplacedSel, makeChange, makeChangeFromHistory, replaceRange } from "./changes";
-import { BranchChunk, LeafChunk, linkedDocs, updateDoc } from "./document_data";
-import { classTest } from "./util/dom";
-import { splitLinesAuto } from "./feature_detection";
-import { History } from "./history";
-import { addLineWidget } from "./line_widget";
-import { markText } from "./mark_text";
-import { docMethodOp } from "./operations";
-import { cmp, Pos } from "./Pos";
-import { ensureCursorVisible } from "./scrolling";
-import { Range } from "./selection";
-import { visualLine } from "./line/spans";
-import { createObj, indexOf, lst } from "./util/misc";
-import { getBetween, getLine, getLines, isLine, lineNo } from "./utils_line";
-import { clipPos, clipPosArray } from "./utils_pos";
+import { changeLine, computeReplacedSel, makeChange, makeChangeFromHistory, replaceRange } from "../changes";
+import { BranchChunk, LeafChunk, linkedDocs, updateDoc } from "../document_data";
+import { classTest } from "../util/dom";
+import { splitLinesAuto } from "../feature_detection";
+import { History } from "../history";
+import { addLineWidget } from "../line_widget";
+import { markText } from "../mark_text";
+import { docMethodOp } from "../operations";
+import { cmp, Pos } from "../Pos";
+import { ensureCursorVisible } from "../scrolling";
+import { Range } from "../selection";
+import { visualLine } from "../line/spans";
+import { createObj, indexOf, lst } from "../util/misc";
+import { getBetween, getLine, getLines, isLine, lineNo } from "../utils_line";
+import { clipPos, clipPosArray } from "../utils_pos";
 
-import { Line } from "./line/line_data";
-import { normalizeSelection, Selection } from "./selection";
-import { simpleSelection } from "./selection";
-import { extendSelection, extendSelections, setSelection, setSelectionReplaceHistory, setSimpleSelection } from "./selection_updates";
-import { map, sel_dontScroll } from "./util/misc";
+import { Line } from "../line/line_data";
+import { normalizeSelection, Selection } from "../selection";
+import { simpleSelection } from "../selection";
+import { extendSelection, extendSelections, setSelection, setSelectionReplaceHistory, setSimpleSelection } from "../selection_updates";
+import { map, sel_dontScroll } from "../util/misc";
 
 var nextDocId = 0;
 var Doc = function(text, mode, firstLine, lineSep) {
