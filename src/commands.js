@@ -1,6 +1,6 @@
 import { deleteNearSelection } from "./api_utilities";
 import { runInOp } from "./operations";
-import Pos from "./Pos";
+import { Pos } from "./Pos";
 import { ensureCursorVisible } from "./scrolling";
 import { Range } from "./selection";
 import { selectAll } from "./selection_updates";

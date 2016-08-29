@@ -1,8 +1,7 @@
 import { hasHandler, signal, signalCursorActivity } from "./util/event";
 import { addSelectionToHistory } from "./history";
 import { signalLater } from "./operations";
-import Pos from "./Pos";
-import { cmp } from "./Pos";
+import { cmp, Pos } from "./Pos";
 import { ensureCursorVisible } from "./scrolling";
 import { normalizeSelection, Range, Selection, simpleSelection } from "./selection";
 import { lst, sel_dontScroll } from "./util/misc";

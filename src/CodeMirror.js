@@ -12,7 +12,7 @@ import { onKeyDown, onKeyPress, onKeyUp } from "./key_events";
 import { maybeUpdateLineNumberWidth } from "./display/line_numbers";
 import { clickInGutter, onContextMenu, onMouseDown } from "./mouse_events";
 import { endOperation, operation, startOperation } from "./operations";
-import Pos from "./Pos";
+import { Pos } from "./Pos";
 import { posFromMouse } from "./measurement/position_measurement";
 import { onScrollWheel, setScrollLeft, setScrollTop } from "./scroll_events";
 import { Range } from "./selection";

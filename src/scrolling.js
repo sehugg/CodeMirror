@@ -1,6 +1,6 @@
 import { elt } from "./util/dom";
 import { signalDOMEvent } from "./util/event";
-import Pos from "./Pos";
+import { Pos } from "./Pos";
 import { cursorCoords, displayHeight, displayWidth, estimateCoords, paddingTop, paddingVert, scrollGap, textHeight } from "./measurement/position_measurement";
 import { setScrollLeft, setScrollTop } from "./scroll_events";
 import { phantom } from "./util/browser";

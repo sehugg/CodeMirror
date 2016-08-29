@@ -1,4 +1,4 @@
-import Pos from "./Pos";
+import { Pos } from "./Pos";
 import { getLine } from "./utils_line";
 
 // Most of the external API clips given positions to make sure they

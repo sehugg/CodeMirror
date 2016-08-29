@@ -1,7 +1,7 @@
 // POSITION OBJECT
 
 // A Pos instance represents a position within the text.
-function Pos (line, ch) {
+export function Pos (line, ch) {
   if (!(this instanceof Pos)) return new Pos(line, ch);
   this.line = line; this.ch = ch;
 }
@@ -13,5 +13,3 @@ export function cmp(a, b) { return a.line - b.line || a.ch - b.ch; }
 export function copyPos(x) {return Pos(x.line, x.ch);}
 export function maxPos(a, b) { return cmp(a, b) < 0 ? b : a; }
 export function minPos(a, b) { return cmp(a, b) < 0 ? a : b; }
-
-export default Pos;

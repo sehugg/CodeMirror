@@ -1,7 +1,7 @@
 import { elt, removeChildren, range, removeChildrenAndAdd } from "../util/dom";
 import { hasBadZoomedRects } from "../feature_detection";
 import { buildLineContent } from "../line/line_data";
-import Pos from "../Pos";
+import { Pos } from "../Pos";
 import { collapsedSpanAtEnd, heightAtLine, lineIsHidden, visualLine } from "../line/spans";
 import { ie, ie_version } from "../util/browser";
 import { updateLineForChanges } from "./update_line";

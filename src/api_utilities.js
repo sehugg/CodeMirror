@@ -1,8 +1,7 @@
 import { replaceRange } from "./changes";
 import { getStateBefore } from "./line/highlight";
 import { runInOp } from "./operations";
-import Pos from "./Pos";
-import { cmp } from "./Pos";
+import { cmp, Pos } from "./Pos";
 import { ensureCursorVisible } from "./scrolling";
 import { Range } from "./selection";
 import { replaceOneSelection } from "./selection_updates";

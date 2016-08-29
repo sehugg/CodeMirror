@@ -1,4 +1,4 @@
-import Pos from "../Pos";
+import { Pos } from "../Pos";
 import { charCoords, cursorCoords, displayWidth, paddingH } from "../measurement/position_measurement";
 import { visualLine } from "../line/spans";
 import { getOrder, iterateBidiSections } from "../util/bidi";

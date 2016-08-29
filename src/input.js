@@ -2,7 +2,7 @@ import { indentLine } from "./api_utilities";
 import { makeChange } from "./changes";
 import { elt } from "./util/dom";
 import { runInOp, signalLater } from "./operations";
-import Pos from "./Pos";
+import { Pos } from "./Pos";
 import { ensureCursorVisible } from "./scrolling";
 import { ios, webkit } from "./util/browser";
 import { lst, map } from "./util/misc";

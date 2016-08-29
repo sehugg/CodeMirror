@@ -64,8 +64,7 @@ CodeMirror.scrollbarModel = scrollbarModel;
 
 // POSITION OBJECT
 
-import Pos from "./Pos";
-import { cmp } from "./Pos";
+import { cmp, Pos } from "./Pos";
 
 CodeMirror.Pos = Pos;
 CodeMirror.cmpPos = cmp;

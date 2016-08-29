@@ -6,7 +6,7 @@ import { onBlur } from "./display/focus";
 import { getKeyMap } from "./keymap";
 import { defaultSpecialCharPlaceholder } from "./line/line_data";
 import { alignHorizontally } from "./display/line_numbers";
-import Pos from "./Pos";
+import { Pos } from "./Pos";
 import { clearCaches, compensateForHScroll, estimateLineHeights } from "./measurement/position_measurement";
 import { updateScrollbars } from "./display/scrollbars";
 import { updateSelection } from "./display/selection_draw";

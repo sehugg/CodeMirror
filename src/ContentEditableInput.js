@@ -3,7 +3,7 @@ import { contains, range, removeChildrenAndAdd, selectInput } from "./util/dom";
 import { on, signalDOMEvent } from "./util/event";
 import { applyTextInput, copyableRanges, disableBrowserMagic, handlePaste, hiddenTextarea, lastCopied, setLastCopied } from "./input";
 import { operation, runInOp } from "./operations";
-import Pos from "./Pos";
+import { Pos } from "./Pos";
 import { cmp, maxPos, minPos } from "./Pos";
 import { findViewIndex, findViewForLine, mapFromLineView, nodeAndOffsetInLineMap } from "./measurement/position_measurement";
 import { simpleSelection } from "./selection";
