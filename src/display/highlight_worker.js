@@ -1,7 +1,8 @@
 import { getStateBefore, highlightLine, processLine } from "../line/highlight";
-import { runInOp } from "../operations";
 import { copyState } from "../modes";
 import { bind } from "../util/misc";
+
+import { runInOp } from "./operations";
 import { regLineChange } from "./view_tracking";
 
 // HIGHLIGHT WORKER

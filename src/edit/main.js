@@ -6,15 +6,15 @@ export { CodeMirror } from "./CodeMirror";
 import { eventMixin, off, on } from "../util/event";
 import { indexOf } from "../util/misc";
 
-import { setDefaultOptions } from "../default_options";
+import { defineOptions } from "./options";
 
-setDefaultOptions(CodeMirror);
+defineOptions(CodeMirror);
 
-import addEditorMethods from "../editor_methods";
+import addEditorMethods from "./methods";
 
 addEditorMethods(CodeMirror);
 
-import Doc from "../edit/Doc";
+import Doc from "./Doc";
 
 // Set up methods on CodeMirror's prototype to redirect to the editor's document.
 var dontDelegate = "iter insert remove copy getEditor constructor".split(" ");
@@ -27,8 +27,8 @@ eventMixin(Doc);
 
 // INPUT HANDLING
 
-import ContentEditableInput from "../ContentEditableInput";
-import TextareaInput from "../TextareaInput";
+import ContentEditableInput from "../input/ContentEditableInput";
+import TextareaInput from "../input/TextareaInput";
 CodeMirror.inputStyles = {"textarea": TextareaInput, "contenteditable": ContentEditableInput};
 
 // MODE DEFINITION AND QUERYING

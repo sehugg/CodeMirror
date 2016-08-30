@@ -1,8 +1,8 @@
-import { elt } from "../util/dom";
 import { buildLineContent } from "../line/line_data";
-import { signalLater } from "../operation_group";
+import { lineNumberFor } from "../line/utils_line";
 import { ie, ie_version } from "../util/browser";
-import { lineNumberFor } from "../utils_line";
+import { elt } from "../util/dom";
+import { signalLater } from "../util/operation_group";
 
 // When an aspect of a line changes, a string is added to
 // lineView.changes. This updates the relevant part of the line's

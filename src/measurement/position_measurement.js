@@ -1,17 +1,16 @@
-import { elt, removeChildren, range, removeChildrenAndAdd } from "../util/dom";
-import { hasBadZoomedRects } from "../feature_detection";
-import { buildLineContent } from "../line/line_data";
-import { Pos } from "../Pos";
+import { buildLineContent, LineView } from "../line/line_data";
+import { clipPos, Pos } from "../line/pos";
 import { collapsedSpanAtEnd, heightAtLine, lineIsHidden, visualLine } from "../line/spans";
-import { ie, ie_version } from "../util/browser";
-import { updateLineForChanges } from "./update_line";
-import { countColumn, isExtendingChar, scrollerGap } from "../util/misc";
+import { getLine, lineAtHeight, lineNo, updateLineHeight } from "../line/utils_line";
 import { bidiLeft, bidiRight, bidiOther, getBidiPartAt, getOrder, lineLeft, lineRight, moveVisually } from "../util/bidi";
+import { ie, ie_version } from "../util/browser";
+import { elt, removeChildren, range, removeChildrenAndAdd } from "../util/dom";
 import { e_target } from "../util/event";
-import { getLine, lineAtHeight, lineNo, updateLineHeight } from "../utils_line";
-import { clipPos } from "../utils_pos";
-import { widgetHeight } from "../utils_widgets";
-import { LineView } from "../line/line_data";
+import { hasBadZoomedRects } from "../util/feature_detection";
+import { countColumn, isExtendingChar, scrollerGap } from "../util/misc";
+
+import { updateLineForChanges } from "./update_line";
+import { widgetHeight } from "./widgets";
 
 // POSITION MEASUREMENT
 

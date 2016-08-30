@@ -1,17 +1,18 @@
+import { sawCollapsedSpans } from "../line/saw_special_spans";
+import { heightAtLine, visualLineEndNo, visualLineNo } from "../line/spans";
+import { getLine, lineNumberFor } from "../line/utils_line";
+import { displayHeight, displayWidth, getDimensions, paddingVert, scrollGap } from "../measurement/position_measurement";
+import { buildLineElement, updateLineForChanges } from "../measurement/update_line";
+import { mac, webkit } from "../util/browser";
 import { activeElt, removeChildren } from "../util/dom";
 import { hasHandler, signal } from "../util/event";
+import { indexOf } from "../util/misc";
+
 import { startWorker } from "./highlight_worker";
 import { maybeUpdateLineNumberWidth } from "./line_numbers";
-import { displayHeight, displayWidth, getDimensions, paddingVert, scrollGap } from "../measurement/position_measurement";
-import { sawCollapsedSpans } from "../line/saw_special_spans";
 import { measureForScrollbars, updateScrollbars } from "./scrollbars";
-import { updateSelection } from "./selection_draw";
-import { mac, webkit } from "../util/browser";
-import { heightAtLine, visualLineEndNo, visualLineNo } from "../line/spans";
-import { buildLineElement, updateLineForChanges } from "../measurement/update_line";
+import { updateSelection } from "./selection";
 import { updateHeightsInViewport, visibleLines } from "./update_lines";
-import { indexOf } from "../util/misc";
-import { getLine, lineNumberFor } from "../utils_line";
 import { adjustView, countDirtyView, resetView } from "./view_tracking";
 
 // DISPLAY DRAWING

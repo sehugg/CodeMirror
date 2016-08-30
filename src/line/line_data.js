@@ -1,12 +1,13 @@
+import { getOrder } from "../util/bidi";
+import { ie, ie_version, webkit } from "../util/browser";
 import { elt, joinClasses } from "../util/dom";
 import { eventMixin, signal } from "../util/event";
-import { hasBadBidiRects, zeroWidthElement } from "../feature_detection";
-import { getLineStyles } from "./highlight";
-import { ie, ie_version, webkit } from "../util/browser";
-import { attachMarkedSpans, compareCollapsedMarkers, detachMarkedSpans, lineIsHidden, visualLineContinued } from "./spans";
-import { getOrder } from "../util/bidi";
-import { getLine, lineNo, updateLineHeight } from "../utils_line";
+import { hasBadBidiRects, zeroWidthElement } from "../util/feature_detection";
 import { lst, spaceStr } from "../util/misc";
+
+import { getLineStyles } from "./highlight";
+import { attachMarkedSpans, compareCollapsedMarkers, detachMarkedSpans, lineIsHidden, visualLineContinued } from "./spans";
+import { getLine, lineNo, updateLineHeight } from "./utils_line";
 
 // LINE DATA STRUCTURE
 

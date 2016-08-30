@@ -1,9 +1,11 @@
-import { elt } from "../util/dom";
+import { addClass, elt, rmClass } from "../util/dom";
 import { on } from "../util/event";
 import { scrollGap, paddingVert } from "../measurement/position_measurement";
 import { ie, ie_version, mac, mac_geMountainLion } from "../util/browser";
 import { updateHeightsInViewport } from "./update_lines";
 import { copyObj, Delayed } from "../util/misc";
+
+import { setScrollLeft, setScrollTop } from "./scroll_events";
 
 // SCROLLBARS
 
@@ -162,3 +164,25 @@ function updateScrollbarsInner(cm, measure) {
 }
 
 export var scrollbarModel = {"native": NativeScrollbars, "null": NullScrollbars};
+
+export function initScrollbars(cm) {
+  if (cm.display.scrollbars) {
+    cm.display.scrollbars.clear();
+    if (cm.display.scrollbars.addClass)
+      rmClass(cm.display.wrapper, cm.display.scrollbars.addClass);
+  }
+
+  cm.display.scrollbars = new scrollbarModel[cm.options.scrollbarStyle](function(node) {
+    cm.display.wrapper.insertBefore(node, cm.display.scrollbarFiller);
+    // Prevent clicks in the scrollbars from killing focus
+    on(node, "mousedown", function() {
+      if (cm.state.focused) setTimeout(function() { cm.display.input.focus(); }, 0);
+    });
+    node.setAttribute("cm-not-content", "true");
+  }, function(pos, axis) {
+    if (axis == "horizontal") setScrollLeft(cm, pos);
+    else setScrollTop(cm, pos);
+  }, cm);
+  if (cm.display.scrollbars.addClass)
+    addClass(cm.display.wrapper, cm.display.scrollbars.addClass);
+}

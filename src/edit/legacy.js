@@ -1,23 +1,23 @@
 import { off, on } from "../util/event";
 import { e_preventDefault, e_stop, e_stopPropagation } from "../util/event";
-import { keyMap, keyName, isModifierKey, lookupKey, normalizeKeyMap } from "../keymap";
+import { keyMap, keyName, isModifierKey, lookupKey, normalizeKeyMap } from "../input/keymap";
 import { addClass, contains, rmClass } from "../util/dom";
-import { keyNames } from "../keynames";
-import StringStream from "../StringStream";
-import { wheelEventPixels } from "../scroll_events";
+import { keyNames } from "../input/keynames";
+import StringStream from "../util/StringStream";
+import { wheelEventPixels } from "../display/scroll_events";
 import Doc from "./Doc";
-import { splitLinesAuto } from "../feature_detection";
+import { splitLinesAuto } from "../util/feature_detection";
 import { countColumn, findColumn, isWordCharBasic, Pass } from "../util/misc";
 import { signal } from "../util/event";
 import { Line } from "../line/line_data";
-import { changeEnd } from "../changes";
-import { commands } from "../commands";
+import { changeEnd } from "../model/change_measurement";
+import { commands } from "./commands";
 import { scrollbarModel } from "../display/scrollbars";
-import { cmp, Pos } from "../Pos";
+import { cmp, Pos } from "../line/pos";
 import { extendMode, getMode, mimeModes, modeExtensions, modes, resolveMode } from "../modes";
 import { copyState, innerMode, startState } from "../modes";
-import { LineWidget } from "../line_widget";
-import { SharedTextMarker, TextMarker } from "../mark_text";
+import { LineWidget } from "./line_widget";
+import { SharedTextMarker, TextMarker } from "../model/mark_text";
 
 export function addLegacyProps(CodeMirror) {
   CodeMirror.off = off;

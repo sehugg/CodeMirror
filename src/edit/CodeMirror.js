@@ -1,32 +1,31 @@
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
 // Distributed under an MIT license: http://codemirror.net/LICENSE
 
-import { initScrollbars, setGuttersForLineNumbers, themeChanged, updateGutters } from "../cm_utils";
-import { Init } from "../default_options";
-import { attachDoc } from "../document_data";
-import { clearDragCursor, onDragOver, onDragStart, onDrop } from "../drop_events";
+import { themeChanged } from "./utils";
+import { setGuttersForLineNumbers, updateGutters } from "../display/gutters";
+import { initScrollbars } from "../display/scrollbars";
+import { Init } from "./options";
+import { attachDoc } from "../model/document_data";
+import { clearDragCursor, onDragOver, onDragStart, onDrop } from "./drop_events";
 import { on, signal, signalDOMEvent } from "../util/event";
 import { onFocus, onBlur } from "../display/focus";
-import { ensureGlobalHandlers } from "../global_events";
-import { onKeyDown, onKeyPress, onKeyUp } from "../key_events";
+import { ensureGlobalHandlers } from "./global_events";
+import { onKeyDown, onKeyPress, onKeyUp } from "./key_events";
 import { maybeUpdateLineNumberWidth } from "../display/line_numbers";
-import { clickInGutter, onContextMenu, onMouseDown } from "../mouse_events";
-import { endOperation, operation, startOperation } from "../operations";
-import { Pos } from "../Pos";
+import { clickInGutter, onContextMenu, onMouseDown } from "./mouse_events";
+import { endOperation, operation, startOperation } from "../display/operations";
+import { defaults, optionHandlers } from "./options";
+import { clipPos, Pos } from "../line/pos";
 import { posFromMouse } from "../measurement/position_measurement";
-import { onScrollWheel, setScrollLeft, setScrollTop } from "../scroll_events";
-import { Range } from "../selection";
-import { extendSelection } from "../selection_updates";
+import { onScrollWheel, setScrollLeft, setScrollTop } from "../display/scroll_events";
+import { Range } from "../model/selection";
+import { extendSelection } from "../model/selection_updates";
 import { captureRightClick, ie, ie_version, mobile, webkit } from "../util/browser";
 import { bind, copyObj, Delayed } from "../util/misc";
-import { eventInWidget } from "../utils_widgets";
+import { eventInWidget } from "../measurement/widgets";
 import { e_preventDefault, e_stop } from "../util/event";
-import { clipPos } from "../utils_pos";
-import Display from "../Display";
+import { Display } from "../display/Display";
 import Doc from "./Doc";
-
-var defaults;
-var optionHandlers;
 
 // A CodeMirror instance represents an editor. This is the object
 // that user code is usually dealing with.
@@ -101,9 +100,9 @@ export function CodeMirror(place, options) {
 }
 
 // The default configuration options.
-defaults = CodeMirror.defaults = {};
+CodeMirror.defaults = defaults;
 // Functions to run when options are changed.
-optionHandlers = CodeMirror.optionHandlers = {};
+CodeMirror.optionHandlers = optionHandlers;
 
 export default CodeMirror;
 
