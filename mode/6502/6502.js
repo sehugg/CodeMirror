@@ -23,7 +23,7 @@ CodeMirror.defineMode('6502', function(_config, parserConfig) {
     'ifnconst','if','else','endif','eif','repeat','repend'];
   var directives = {};
   for (var s of directives_list)
-    directives[s] = 'builtin';
+    directives[s] = 'keyword';
 
   var opcodes = /^[a-z][a-z][a-z]\b/i;
   var numbers = /^([\da-f]+h|[0-7]+o|[01]+b|\d+d?)\b/i;
@@ -77,7 +77,7 @@ CodeMirror.defineMode('6502', function(_config, parserConfig) {
         if (stream.match(/\\?.'/))
           return 'number';
       } else if (stream.eat('$') || stream.eat('#')) {
-        if (stream.eatWhile(/[\da-f]/i))
+        if (stream.eatWhile(/[^;]/i))
           return 'number';
       } else if (stream.eat('%')) {
         if (stream.eatWhile(/[01]/))
