@@ -37,7 +37,7 @@ CodeMirror.defineMode('6502', function(_config, parserConfig) {
     token: function(stream, state) {
       if (!stream.column()) {
         state.context = 0;
-        if (stream.eatWhile(/\w/))
+        if (stream.eatWhile(/[\w.]/))
           return 'tag';
       }
       if (stream.eatSpace())
