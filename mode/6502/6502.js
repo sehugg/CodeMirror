@@ -18,6 +18,7 @@ CodeMirror.defineMode('6502', function(_config, parserConfig) {
 
   var directives_list = [
     'processor',
+    'byte','word','long',
     'include','seg','dc','ds','dv','hex','err','org','rorg','echo','rend',
     'align','subroutine','equ','eqm','set','mac','endm','mexit','ifconst',
     'ifnconst','if','else','endif','eif','repeat','repend'];
